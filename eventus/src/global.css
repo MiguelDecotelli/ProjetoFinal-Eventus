@@ -1,0 +1,67 @@
+/*  RESET */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	outline: none;
+	font-family: inherit;
+}
+
+html {
+	line-height: 1.5;
+}
+
+body {
+	font-size: 100%;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* MEDIA QUERIES */
+
+/* Mobile - dispositivos menores que 480px */
+@media (max-width: 479.98px) {
+}
+
+/* Extra Small (xs) - dispositivos menores que 576px */
+@media (max-width: 575.98px) {
+}
+
+/* Small (sm) - dispositivos a partir de 576px */
+@media (min-width: 576px) {
+}
+
+/* Medium (md) - dispositivos a partir de 768px*/
+@media (min-width: 768px) {
+}
+
+/* Large (lg) - dispositivos a partir de 992px */
+@media (min-width: 992px) {
+}
+
+/* Extra Large (xl) - dispositivos a partir de 1200px */
+@media (min-width: 1200px) {
+}
+
+/* Extra Extra Large (xxl) - dispositivos a partir de 1400px  */
+@media (min-width: 1400px) {
+}
