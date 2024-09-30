@@ -1,0 +1,17 @@
+services: 
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'eventus'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: 'admin'
+      MYSQL_ROOT_PASSWORD: 'admin'
+    ports:
+      - '3346:3346'
+    expose:
+      - '3346'
+    volumes:
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
