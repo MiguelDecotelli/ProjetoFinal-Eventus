@@ -1,3 +1,11 @@
+:root {
+	--text: #f1e4e6;
+	--background: #11090a;
+	--primary: #d2a7b1;
+	--secondary: #7a2936;
+	--accent: #c36950;
+}
+
 /*  RESET */
 * {
 	margin: 0;
@@ -13,6 +21,17 @@ html {
 
 body {
 	font-size: 100%;
+	font-family: "Noto Sans Mahajani", sans-serif;
+	font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: "Noto Sans Mahajani", sans-serif;
+	font-weight: 700;
 }
 
 a {
@@ -34,6 +53,75 @@ ol {
 img {
 	max-width: 100%;
 	height: auto;
+}
+
+input {
+	background: none;
+	border: none;
+	color: var(--text);
+	text-align: end;
+	padding-right: 1rem;
+}
+
+.text {
+	color: var(--text);
+}
+
+.bg {
+	background-color: var(--background);
+}
+
+.custom-input {
+	color: var(--text);
+	border: none;
+}
+
+.custom-input:focus,
+.custom-input::placeholder {
+	color: var(--text);
+}
+
+.custom-gradient {
+	background: linear-gradient(to right, var(--background), var(--accent));
+}
+
+.custom-style-left,
+.custom-style-right {
+	width: 8rem;
+	padding: 1rem;
+	background-color: var(--accent);
+	color: var(--text);
+	line-height: 1.2;
+}
+
+.custom-style-left {
+	left: -8rem;
+}
+.custom-style-right {
+	right: -8rem;
+}
+
+.custom-section {
+	width: 55rem;
+	height: 35rem;
+}
+
+.custom-background-login,
+.custom-background-signup {
+	background: url("./src/img/bkg.jpg") no-repeat;
+	background-size: cover;
+}
+
+.custom-background-login {
+	background-position: left center;
+}
+.custom-background-signup {
+	background-position: right center;
+}
+
+.overlay {
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1;
 }
 
 /* MEDIA QUERIES */
