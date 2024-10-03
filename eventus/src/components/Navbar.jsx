@@ -55,11 +55,11 @@ export function Navbar() {
 							className="form-control me-2"
 							style={{ "max-width": "250px" }}
 							type="search"
-							placeholder="Search"
+							placeholder="O que você procura?"
 							aria-label="Search"
 						/>
 						<button className="btn btn-outline-light" type="submit">
-							Search
+							<i className="fa-solid fa-magnifying-glass"></i>
 						</button>
 					</form>
 					<div className="p-2 d-flex justify-content-center gap-2">
