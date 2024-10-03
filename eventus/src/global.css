@@ -23,6 +23,8 @@ body {
 	font-size: 100%;
 	font-family: "Noto Sans Mahajani", sans-serif;
 	font-weight: 400;
+	background-color: var(--background);
+	color: var(--text);
 }
 
 h1,

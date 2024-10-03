@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+const inputCSS =
+	"form-control border-0 bg-transparent custom-input px-0 py-2 shadow-none";
 
 export const SignUp = () => {
 	return (
@@ -24,7 +27,7 @@ export const SignUp = () => {
 								</label>
 								<input
 									type="text"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									className={inputCSS}
 									id="username"
 									placeholder="exemplo_usuario"
 								/>
@@ -39,7 +42,7 @@ export const SignUp = () => {
 								</label>
 								<input
 									type="email"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									className={inputCSS}
 									id="inputEmail"
 									placeholder="exemplo@email.com"
 								/>
@@ -54,7 +57,7 @@ export const SignUp = () => {
 								</label>
 								<input
 									type="password"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									className={inputCSS}
 									id="inputPassword"
 									placeholder="********"
 								/>
@@ -68,25 +71,26 @@ export const SignUp = () => {
 									CONFIRMAR SENHA
 								</label>
 								<input
-									type="confirmPassword"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									type="password"
+									className={inputCSS}
 									id="inputConfirmPassword"
 									placeholder="********"
 								/>
 							</div>
 
-							<button
-								className="btn mx-auto btn-outline-light mt-2"
-								type="submit"
-							>
-								Enviar
+							<button className="btn mx-4 btn-outline-light mt-2" type="submit">
+								<NavLink to="/login">Enviar</NavLink>
 							</button>
 						</form>
 					</div>
 				</div>
 
 				<div className="col position-relative w-100 h-100 custom-background-signup">
-					<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay"></div>
+					<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay d-flex flex-row-reverse">
+						<NavLink to="/" className="p-2 z-2">
+							<i className="fa-solid fa-xmark"></i>
+						</NavLink>
+					</div>
 				</div>
 			</section>
 		</main>

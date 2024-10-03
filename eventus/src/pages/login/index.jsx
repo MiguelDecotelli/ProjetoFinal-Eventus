@@ -1,12 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+
+const inputCSS =
+	"form-control border-0 bg-transparent custom-input px-0 py-2 shadow-none";
 
 export const Login = () => {
 	return (
-		<main className="d-flex align-items-center justify-content-center vh-100 custom-gradient">
+		<main className="d-flex  align-items-center justify-content-center vh-100 custom-gradient">
 			<section className="bg text m-auto custom-section row g-0 position-relative">
 				<div className="col position-relative w-100 h-100 custom-background-login">
-					<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay"></div>
+					<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay d-flex flex-row">
+						<NavLink to="/" className="p-2 z-2">
+							<i className="fa-solid fa-xmark"></i>
+						</NavLink>
+					</div>
 				</div>
+
 				<div className="col">
 					<div className="d-flex flex-column justify-content-center h-100 p-3 position-relative">
 						<Link
@@ -16,7 +24,7 @@ export const Login = () => {
 							<i className="fa-solid fa-angles-left"></i>Cadastrar
 						</Link>
 
-						<form className="p-4 d-flex flex-column gap-4">
+						<form className="p-4 d-flex flex-column gap-2">
 							<h3>Conecte-se</h3>
 
 							<div className="input-group d-flex flex-nowrap border-bottom">
@@ -28,7 +36,7 @@ export const Login = () => {
 								</label>
 								<input
 									type="email"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									className={inputCSS}
 									id="inputEmail"
 									placeholder="exemplo@email.com"
 								/>
@@ -43,7 +51,7 @@ export const Login = () => {
 								</label>
 								<input
 									type="password"
-									className="form-control border-0 bg-transparent custom-input px-0 py-2"
+									className={inputCSS}
 									id="inputPassword"
 									placeholder="********"
 								/>
@@ -66,11 +74,8 @@ export const Login = () => {
 								</Link>
 							</div>
 
-							<button
-								className="btn mx-auto btn-outline-light mt-2"
-								type="submit"
-							>
-								Entrar
+							<button className="btn mx-4 btn-outline-light mt-2" type="submit">
+								<NavLink to="/">Entrar</NavLink>
 							</button>
 						</form>
 					</div>

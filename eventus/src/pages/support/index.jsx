@@ -1,7 +1,10 @@
+import { Navbar } from "../../components/Navbar";
+
 export const Support = () => {
 	return (
-		<div>
+		<main className="container">
+			<Navbar />
 			<h1>Suporte</h1>
-		</div>
+		</main>
 	);
 };

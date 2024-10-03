@@ -15,8 +15,8 @@ function MainRoutes() {
 				<Route path="/signup" element={<SignUp />} />
 				<Route path="/login" element={<Login />} />
 
-				<Route path="/contato" element={<Contact />} />
-				<Route path="/suporte" element={<Support />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/support" element={<Support />} />
 
 				{/* BASE ROTA NÃO ENCONTRADA */}
 				<Route path="*" element={<h1>Página não encontrada (404)</h1>} />
