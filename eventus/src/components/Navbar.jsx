@@ -53,7 +53,7 @@ export function Navbar() {
 					<form className="p-2 d-flex justify-content-center" role="search">
 						<input
 							className="form-control me-2"
-							style={{ "max-width": "250px" }}
+							style={{ maxWidth: "250px" }}
 							type="search"
 							placeholder="O que você procura?"
 							aria-label="Search"

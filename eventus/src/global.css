@@ -1,5 +1,6 @@
 :root {
 	--text: #f1e4e6;
+	--text-placeholder: #9b8a8dae;
 	--background: #11090a;
 	--primary: #d2a7b1;
 	--secondary: #7a2936;
@@ -73,14 +74,25 @@ input {
 	background-color: var(--background);
 }
 
-.custom-input {
+.btn-orange {
+	background-color: var(--accent);
+	color: var(--text);
+}
+
+.btn-orange:hover {
+	background-color: var(--accent);
+	color: var(--text);
+	opacity: 0.8;
+}
+
+.custom-input,
+.custom-input:focus {
 	color: var(--text);
 	border: none;
 }
 
-.custom-input:focus,
 .custom-input::placeholder {
-	color: var(--text);
+	color: var(--text-placeholder);
 }
 
 .custom-gradient {
@@ -124,6 +136,17 @@ input {
 .overlay {
 	background: rgba(0, 0, 0, 0.5);
 	z-index: 1;
+}
+
+.custom-carousel {
+	max-width: 800px;
+	max-height: 440px;
+	margin: auto;
+}
+
+.custom-carousel img {
+	object-fit: cover;
+	height: 450px;
 }
 
 /* MEDIA QUERIES */

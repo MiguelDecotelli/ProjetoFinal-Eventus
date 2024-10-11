@@ -16,7 +16,7 @@ export const Login = () => {
 				</div>
 
 				<div className="col">
-					<div className="d-flex flex-column justify-content-center h-100 p-3 position-relative">
+					<div className="d-flex gap-4 flex-column justify-content-center h-100 p-3 position-relative">
 						<Link
 							to="/signup"
 							className="position-absolute top-0 d-flex justify-content-evenly p-3 z-2 custom-style-left"
@@ -78,6 +78,17 @@ export const Login = () => {
 								<NavLink to="/">Entrar</NavLink>
 							</button>
 						</form>
+
+						<div className="d-grid text-center gap-2 col-6 mx-auto">
+							<p>OU</p>
+							<button
+								className="btn btn-light rounded-pill border d-flex gap-2 align-items-center justify-content-center"
+								type="button"
+							>
+								<i className="fa-brands fa-google"></i>
+								Entrar com o Google
+							</button>
+						</div>
 					</div>
 				</div>
 			</section>
