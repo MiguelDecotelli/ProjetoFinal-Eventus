@@ -149,6 +149,12 @@ input {
 	height: 450px;
 }
 
+.error-message {
+	height: 1.5rem;
+	transition: opacity 0.2s ease;
+	font-size: 0.875rem;
+}
+
 /* MEDIA QUERIES */
 
 /* Mobile - dispositivos menores que 480px */

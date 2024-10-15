@@ -1,7 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import ImgLogo from "../img/logo-w.png";
+import { useUser } from "../context/UserContext";
 
 export function Navbar() {
+	const { user, logout } = useUser();
+
 	return (
 		<nav className="navbar navbar-expand-lg bg container">
 			<div className="container-fluid py-2">
@@ -62,15 +65,25 @@ export function Navbar() {
 							<i className="fa-solid fa-magnifying-glass"></i>
 						</button>
 					</form>
-					<div className="p-2 d-flex justify-content-center gap-2">
-						<button type="button" className="btn btn-outline-light">
-							<NavLink to="/signup">Entrar</NavLink>
-						</button>
+					{user ? (
+						<div className="p-2 d-flex justify-content-center align-items-center gap-2">
+							<span>Olá, {user}!</span>
 
-						<button type="button" className="btn btn-light">
-							<NavLink to="/login">Cadastrar</NavLink>
-						</button>
-					</div>
+							<button type="button" onClick={logout} className="btn btn-light">
+								Sair
+							</button>
+						</div>
+					) : (
+						<div className="p-2 d-flex justify-content-center gap-2">
+							<button type="button" className="btn btn-outline-light">
+								<NavLink to="/signup">Cadastrar</NavLink>
+							</button>
+
+							<button type="button" className="btn btn-light">
+								<NavLink to="/login">Entrar</NavLink>
+							</button>
+						</div>
+					)}
 				</div>
 			</div>
 		</nav>

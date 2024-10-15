@@ -1,9 +1,58 @@
-import { Link, NavLink } from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
-const inputCSS =
-	"form-control border-0 bg-transparent custom-input px-0 py-2 shadow-none";
+import { Input } from "../../components/Input";
+import { makeRequest } from "../../utils/makeRequest";
+
+const schema = yup.object().shape({
+	username: yup.string().required("O usuário é obrigatório."),
+	email: yup
+		.string()
+		.email("Email inválido")
+		.required("O email é obrigatório."),
+	password: yup
+		.string()
+		.min(8, "A senha deve ter no mínimo 8 caracteres")
+		.required("A senha é obrigatória."),
+	confirmPassword: yup
+		.string()
+		.oneOf([yup.ref("password"), null], "As senhas devem coincidir")
+		.required("A confirmação da senha é obrigatória."),
+});
 
 export const SignUp = () => {
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		resolver: yupResolver(schema),
+	});
+
+	async function handleSignup(data) {
+		setLoading(true);
+
+		const { confirmPassword, ...signupData } = data;
+
+		try {
+			await makeRequest("/users", "POST", signupData);
+			alert("Usuário cadastrado com sucesso!");
+			navigate("/login");
+		} catch (error) {
+			console.error("Erro ao cadastrar usuário:", error);
+			alert("Erro ao cadastrar usuário. Tente novamente.");
+		} finally {
+			setLoading(false);
+		}
+	}
+
 	return (
 		<main className="d-flex align-items-center justify-content-center vh-100 custom-gradient">
 			<section className="bg text m-auto custom-section row g-0 position-relative">
@@ -16,70 +65,50 @@ export const SignUp = () => {
 							Entrar <i className="fa-solid fa-angles-right"></i>
 						</Link>
 
-						<form className="p-4 d-flex flex-column gap-4">
+						<form
+							className="p-4 d-flex flex-column gap-2"
+							onSubmit={handleSubmit(handleSignup)}
+						>
 							<h3>Cadastre-se</h3>
-							<div className="input-group d-flex flex-nowrap border-bottom">
-								<label
-									className="input-group-text border-0 bg-transparent text p-0"
-									htmlFor="username"
-								>
-									NOME DE USUÁRIO
-								</label>
-								<input
-									type="text"
-									className={inputCSS}
-									id="username"
-									placeholder="exemplo_usuario"
-								/>
-							</div>
 
-							<div className="input-group d-flex flex-nowrap border-bottom">
-								<label
-									className="input-group-text border-0 bg-transparent text p-0"
-									htmlFor="inputEmail"
-								>
-									EMAIL
-								</label>
-								<input
-									type="email"
-									className={inputCSS}
-									id="inputEmail"
-									placeholder="exemplo@email.com"
-								/>
-							</div>
+							<Input
+								label="USUÁRIO"
+								id="username"
+								placeholder="exemplo_usuario"
+								{...register("username")}
+								error={errors.username?.message}
+							/>
+							<Input
+								label="EMAIL"
+								id="inputEmail"
+								type="email"
+								placeholder="exemplo@email.com"
+								{...register("email")}
+								error={errors.email?.message}
+							/>
+							<Input
+								label="SENHA"
+								id="inputPassword"
+								type="password"
+								placeholder="********"
+								{...register("password")}
+								error={errors.password?.message}
+							/>
+							<Input
+								label="CONFIRMAR SENHA"
+								id="inputConfirmPassword"
+								type="password"
+								placeholder="********"
+								{...register("confirmPassword")}
+								error={errors.confirmPassword?.message}
+							/>
 
-							<div className="input-group d-flex flex-nowrap border-bottom">
-								<label
-									className="input-group-text border-0 bg-transparent text p-0"
-									htmlFor="inputPassword"
-								>
-									SENHA
-								</label>
-								<input
-									type="password"
-									className={inputCSS}
-									id="inputPassword"
-									placeholder="********"
-								/>
-							</div>
-
-							<div className="input-group d-flex flex-nowrap border-bottom">
-								<label
-									className="input-group-text border-0 bg-transparent text p-0"
-									htmlFor="inputConfirmPassword"
-								>
-									CONFIRMAR SENHA
-								</label>
-								<input
-									type="password"
-									className={inputCSS}
-									id="inputConfirmPassword"
-									placeholder="********"
-								/>
-							</div>
-
-							<button className="btn mx-4 btn-outline-light mt-2" type="submit">
-								<NavLink to="/login">Enviar</NavLink>
+							<button
+								className="btn mx-4 btn-outline-light mt-2"
+								type="submit"
+								disabled={loading}
+							>
+								{loading ? "Carregando..." : "Enviar"}
 							</button>
 						</form>
 					</div>
