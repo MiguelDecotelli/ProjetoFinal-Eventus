@@ -1,0 +1,18 @@
+* {
+  margin: 0 auto;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  gap: 1rem;
+  width: 300px;
+  height: 450px;
+  padding: 20px;
+  background-color: #2e2e2e;
+  color: #fff;
+  border-radius: 10px;
+}
