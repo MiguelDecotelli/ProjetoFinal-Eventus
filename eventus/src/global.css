@@ -21,11 +21,20 @@ html {
 }
 
 body {
+	border: solid blue 1px;
 	font-size: 100%;
 	font-family: "Noto Sans Mahajani", sans-serif;
 	font-weight: 400;
 	background-color: var(--background);
 	color: var(--text);
+}
+
+.container {
+	border: solid red 1px;
+}
+
+main {
+	border: solid yellow 1px;
 }
 
 h1,
@@ -111,6 +120,7 @@ input {
 .custom-style-left {
 	left: -8rem;
 }
+
 .custom-style-right {
 	right: -8rem;
 }
@@ -129,6 +139,7 @@ input {
 .custom-background-login {
 	background-position: left center;
 }
+
 .custom-background-signup {
 	background-position: right center;
 }
@@ -138,9 +149,16 @@ input {
 	z-index: 1;
 }
 
+.slide {
+	justify-content: center;
+	width: 100%;
+	/* height: 100%; */
+	border: solid green 1px;
+}
+
 .custom-carousel {
-	max-width: 800px;
-	max-height: 440px;
+	/* width: 70rem; */
+	/* max-height: 440px; */
 	margin: auto;
 }
 
@@ -154,36 +172,30 @@ input {
 	transition: opacity 0.2s ease;
 	font-size: 0.875rem;
 }
-.no-after::after{
+
+.no-after::after {
 	content: none !important;
 }
 
 /* MEDIA QUERIES */
 
 /* Mobile - dispositivos menores que 480px */
-@media (max-width: 479.98px) {
-}
+@media (max-width: 479.98px) {}
 
 /* Extra Small (xs) - dispositivos menores que 576px */
-@media (max-width: 575.98px) {
-}
+@media (max-width: 575.98px) {}
 
 /* Small (sm) - dispositivos a partir de 576px */
-@media (min-width: 576px) {
-}
+@media (min-width: 576px) {}
 
 /* Medium (md) - dispositivos a partir de 768px*/
-@media (min-width: 768px) {
-}
+@media (min-width: 768px) {}
 
 /* Large (lg) - dispositivos a partir de 992px */
-@media (min-width: 992px) {
-}
+@media (min-width: 992px) {}
 
 /* Extra Large (xl) - dispositivos a partir de 1200px */
-@media (min-width: 1200px) {
-}
+@media (min-width: 1200px) {}
 
 /* Extra Extra Large (xxl) - dispositivos a partir de 1400px  */
-@media (min-width: 1400px) {
-}
+@media (min-width: 1400px) {}
