@@ -1,13 +1,13 @@
 package com.eventus.eventus.model;
 
 public enum UserRole{
-    BASIC(1),
-    ADMIN(2);
-    int roleId;
-    UserRole(int roleId){
-      this.roleId = roleId;
+    BASIC("basic"),
+    ADMIN("admin");
+    String role;
+    UserRole(String role){
+      this.role = role;
     }
-    public int getRoleId(){
-      return roleId;
+    public String getRole(){
+      return this.role;
     }
 }

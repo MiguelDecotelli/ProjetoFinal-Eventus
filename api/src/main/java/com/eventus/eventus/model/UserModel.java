@@ -1,29 +1,86 @@
 package com.eventus.eventus.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Data
 @Table(name="Users")
-public class UserModel {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserModel implements UserDetails {
     @Id
-    @Column(name="user_id")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int userId;
-    @Column(name="user_username", nullable = false, unique = true)
-    private String userUsername;
-    @Column(name="user_password", nullable = false, unique = true)
-    private String userPassword;
-    @Column(name="user_email", nullable = false, unique = true)
-    private String userEmail;
-    @Column(name="user_name")
-    private String userName;
-    @Column(name="user_lastname")
-    private String userLastname;
-    @Column(name="user_birthday")
-    private Date userBirthday;
-    @Column(name="user_role")
-    private String userRole;
+    private int id;
+
+    @Column(name="username", nullable = false, unique = true)
+    private String username;
+
+    @Column(name="password", nullable = false, unique = true)
+    private String password;
+
+    @Column(name="email", nullable = false, unique = true)
+    private String email;
+
+    @Column(name="name")
+    private String name;
+
+    @Column(name="lastname")
+    private String lastname;
+
+    @Column(name="birthday")
+    private Date birthday;
+
+    @Column(name="role")
+    private UserRole role;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if(this.role == UserRole.ADMIN){
+            return List.of(
+                    new SimpleGrantedAuthority("ROLE_ADMIN"),
+                    new SimpleGrantedAuthority("ROLE_USER")
+                    );
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
 }

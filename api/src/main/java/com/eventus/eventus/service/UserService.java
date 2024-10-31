@@ -4,6 +4,7 @@ import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.model.UserModel;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,11 +30,12 @@ public class UserService {
     public UserDTO createUser(UserDTO userDTO){
         // TODO: Handle Erros
         UserModel userModel = new UserModel();
-        userModel.setUserUsername(userDTO.getUserUsername());
-        userModel.setUserName(userDTO.getUserName());
-        userModel.setUserEmail(userDTO.getUserEmail());
-        userModel.setUserBirthday(userDTO.getUserBirthday());
-        userModel.setUserLastname(userDTO.getUserLastname());
+        userModel.setUsername(userDTO.getUsername());
+        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+        userModel.setName(userDTO.getName());
+        userModel.setEmail(userDTO.getEmail());
+        userModel.setBirthday(userDTO.getBirthday());
+        userModel.setLastname(userDTO.getLastname());
         userRepository.save(userModel);
         return convertToDTO(userModel);
     }
@@ -44,11 +46,12 @@ public class UserService {
             return null;
         }
         UserModel userModel = new UserModel();
-        userModel.setUserUsername(userDTO.getUserUsername());
-        userModel.setUserName(userDTO.getUserName());
-        userModel.setUserEmail(userDTO.getUserEmail());
-        userModel.setUserBirthday(userDTO.getUserBirthday());
-        userModel.setUserLastname(userDTO.getUserLastname());
+        userModel.setUsername(userDTO.getUsername());
+        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+        userModel.setName(userDTO.getName());
+        userModel.setEmail(userDTO.getEmail());
+        userModel.setBirthday(userDTO.getBirthday());
+        userModel.setLastname(userDTO.getLastname());
         userRepository.save(userModel);
         return convertToDTO(userModel);
     }
@@ -61,11 +64,11 @@ public class UserService {
     private UserDTO convertToDTO(UserModel userModel){
         // TODO: Handle if user has permissions
         UserDTO userDTO = new UserDTO();
-        userDTO.setUserId(userModel.getUserId());
-        userDTO.setUserName(userModel.getUserName());
-        userDTO.setUserUsername(userModel.getUserUsername());
-        userDTO.setUserLastname(userModel.getUserLastname());
-        userDTO.setUserEmail(userModel.getUserEmail());
+        userDTO.setId(userModel.getId());
+        userDTO.setName(userModel.getName());
+        userDTO.setUsername(userModel.getUsername());
+        userDTO.setLastname(userModel.getLastname());
+        userDTO.setEmail(userModel.getEmail());
         return userDTO;
     }
 }
