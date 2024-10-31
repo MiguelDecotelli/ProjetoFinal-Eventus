@@ -1,17 +1,17 @@
 services: 
   db:
     image: mysql:8.0
-    restart: always
+    restart: unless-stopped
     environment:
       MYSQL_DATABASE: 'eventus'
       MYSQL_USER: 'admin'
       MYSQL_PASSWORD: 'admin'
       MYSQL_ROOT_PASSWORD: 'admin'
     ports:
-      - '3346:3306'
+      - '3386:3306'
     expose:
-      - '3346'
+      - '3386'
     volumes:
-      - my-db:/var/lib/mysql
+      - eventus-db:/var/lib/mysql
 volumes:
-  my-db:
+  eventus-db:
