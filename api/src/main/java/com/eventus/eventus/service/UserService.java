@@ -2,67 +2,89 @@ package com.eventus.eventus.service;
 
 import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.model.UserModel;
+import com.eventus.eventus.model.UserRole;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
     @Autowired
-    UserRepository userRepository;
-    public List<UserDTO> getAllUsers(){
-        return userRepository
-                .findAll()
-                .stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
+    UserRepository repository;
+    public ResponseEntity<List<UserDTO>> getAllUsers(){
+        List<UserDTO> users = repository.findAll().stream().map(this::convertToDTO).toList();
+        return ResponseEntity.ok(users);
     }
-    // TODO: Change type
-    public UserDTO getUserById(int id){
-        Optional<UserModel> user= userRepository.findById(id);
-        return user.map(this::convertToDTO).orElse(null);
-    }
-    public UserDTO createUser(UserDTO userDTO){
-        // TODO: Handle Erros
-        UserModel userModel = new UserModel();
-        userModel.setUsername(userDTO.getUsername());
-        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-        userModel.setName(userDTO.getName());
-        userModel.setEmail(userDTO.getEmail());
-        userModel.setBirthday(userDTO.getBirthday());
-        userModel.setLastname(userDTO.getLastname());
-        userRepository.save(userModel);
-        return convertToDTO(userModel);
-    }
-    public UserDTO updateUser(int id, UserDTO userDTO){
-        // TODO: Handle if user has permissions
-        Optional<UserModel> userOption = userRepository.findById(id);
-        if(!userOption.isPresent()){
-            return null;
+    public ResponseEntity<UserDTO> getUserById(int id){
+        try {
+            Optional<UserModel> userOption = repository.findById(id);
+            if (userOption.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(convertToDTO(userOption.get()));
+
+        } catch(DataAccessException e){
+            return ResponseEntity.internalServerError().build();
         }
-        UserModel userModel = new UserModel();
-        userModel.setUsername(userDTO.getUsername());
-        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-        userModel.setName(userDTO.getName());
-        userModel.setEmail(userDTO.getEmail());
-        userModel.setBirthday(userDTO.getBirthday());
-        userModel.setLastname(userDTO.getLastname());
-        userRepository.save(userModel);
-        return convertToDTO(userModel);
     }
-    public void deleteUser(int id){
-        // TODO: Handle if user exists
-        // TODO: Handle if user has permissions
-        // TODO: Handle errors
-        userRepository.deleteById(id);
+    public ResponseEntity<UserDTO> createUser(UserDTO userDTO){
+        try {
+            UserModel userModel = new UserModel();
+            userModel.setUsername(userDTO.getUsername());
+            userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+            userModel.setName(userDTO.getName());
+            userModel.setEmail(userDTO.getEmail());
+            userModel.setBirthday(userDTO.getBirthday());
+            userModel.setLastname(userDTO.getLastname());
+            repository.save(userModel);
+            return ResponseEntity.ok(convertToDTO(userModel));
+        } catch(DataAccessException e){
+            System.out.println(e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    public ResponseEntity<UserDTO> updateUser(int id, UserDTO userDTO){
+        try {
+            Optional<UserModel> userOption = repository.findById(id);
+            if (userOption.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            UserModel userModel = new UserModel();
+            userModel.setUsername(userDTO.getUsername());
+            userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+            userModel.setName(userDTO.getName());
+            userModel.setEmail(userDTO.getEmail());
+            userModel.setBirthday(userDTO.getBirthday());
+            userModel.setLastname(userDTO.getLastname());
+            repository.save(userModel);
+            return ResponseEntity.ok(convertToDTO(userModel));
+        } catch (DataAccessException e){
+            System.out.println(e);
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+    public ResponseEntity<Object> deleteUser(int id){
+        try {
+            Optional<UserModel> userOption = repository.findById(id);
+            if (userOption.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            repository.deleteById(id);
+            return ResponseEntity.ok().build();
+        } catch (DataAccessException e){
+            System.out.println(e);
+            return ResponseEntity.internalServerError().build();
+        }
     }
     private UserDTO convertToDTO(UserModel userModel){
-        // TODO: Handle if user has permissions
         UserDTO userDTO = new UserDTO();
         userDTO.setId(userModel.getId());
         userDTO.setName(userModel.getName());
