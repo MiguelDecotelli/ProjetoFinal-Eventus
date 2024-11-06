@@ -16,3 +16,17 @@
   color: #fff;
   border-radius: 10px;
 }
+
+::-webkit-scrollbar {
+  padding: 20px;
+  width: 12px;
+  background-color: #2e2e2e;
+  border: 5px solid #2e2e2e;
+  border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: rgb(0, 116, 116);
+  border-radius: 50px;
+  border: 2px solid #2e2e2e;
+}
