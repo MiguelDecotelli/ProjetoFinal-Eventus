@@ -11,76 +11,82 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="Users")
+@Table(name = "Users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserModel implements UserDetails {
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+	@Id
+	@Column(name = "user_id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    @Column(name="username", nullable = false, unique = true)
-    private String username;
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
 
-    @Column(name="password", nullable = false, unique = true)
-    private String password;
+	@Column(name = "password", nullable = false, unique = true)
+	private String password;
 
-    @Column(name="email", nullable = false, unique = true)
-    private String email;
+	@Column(name = "email", nullable = false, unique = true)
+	private String email;
 
-    @Column(name="name")
-    private String name;
+	@Column(name = "first_name")
+	private String name;
 
-    @Column(name="lastname")
-    private String lastname;
+	@Column(name = "last_name")
+	private String lastname;
 
-    @Column(name="birthday")
-    private Date birthday;
+	@Column(name = "birthday")
+	private Date birthday;
 
-    @Column(name="role")
-    private UserRole role;
+	@Column(name = "role")
+	private UserRole role;
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        if(this.role == UserRole.ADMIN){
-            return List.of(
-                    new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER")
-                    );
-        }
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+	@Column(name = "phone_number")
+	private String phoneNumber;
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "city", referencedColumnName = "city_id")
+	private CityModel city;
 
-    @Override
-    public String getUsername() {
-        return this.username;
-    }
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if (this.role == UserRole.ADMIN) {
+			return List.of(
+					new SimpleGrantedAuthority("ROLE_ADMIN"),
+					new SimpleGrantedAuthority("ROLE_USER"));
+		}
+		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+	}
 
-    @Override
-    public boolean isAccountNonExpired() {
-        return true;
-    }
+	@Override
+	public String getPassword() {
+		return this.password;
+	}
 
-    @Override
-    public boolean isAccountNonLocked() {
-        return true;
-    }
+	@Override
+	public String getUsername() {
+		return this.username;
+	}
 
-    @Override
-    public boolean isCredentialsNonExpired() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return true;
-    }
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return true;
+	}
 }
