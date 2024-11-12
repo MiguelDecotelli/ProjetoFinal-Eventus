@@ -1,7 +1,8 @@
 .container-eventos {
   max-width: 1280px;
   margin: 0 auto;
-  text-align: center;
+  text-align: center;  
+  margin-bottom: 30px;
 }
 
 .container-eventos h1 {
@@ -26,7 +27,7 @@
   text-align: left;
   width: 80%;
   padding: 10px;
-  border: 1px solid #fff;
+  border: 1px solid #f1e4e6;
   border-radius: 15px;
   background-color: #242424;
 }
@@ -43,5 +44,29 @@ ul {
   gap: 2rem;
   padding: 20px;
   border-radius: 5px;
-  background-color: rgb(0, 116, 116);
+  /* background-color: rgb(0, 116, 116); */
+  background-color: #c36950;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 10px;
+  padding: 5px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+  background-color: #c36950;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination button:disabled {
+  background-color: #f1e4e6;
+  cursor: not-allowed;
 }

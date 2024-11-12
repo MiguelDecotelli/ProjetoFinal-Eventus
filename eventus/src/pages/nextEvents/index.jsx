@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { CardEvento } from '../../components/CardEvento';
 import { Navbar } from '../../components/Navbar';
-import { DragDropContext, Droppable } from '@hello-pangea/dnd';
+import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
+import { FaChevronLeft, FaChevronRight  } from "react-icons/fa6";
 
 import './App.css';
 
@@ -16,6 +17,12 @@ export const NextEvents = () => {
   const [displayedEvents, setDisplayedEvents] = useState([]); // Lista de eventos filtrados
   const [loading, setLoading] = useState(true); // Estado de carregamento
 
+  // Estados de paginação
+  const [currentPage, setCurrentPage] = useState(1); // Página atual
+  const [itemsPerPage] = useState(6); // Quantidade de itens por página
+  
+// #######################################################################################
+  
   // Fazer a requisição para a API quando o componente for montado
   useEffect(() => {
     const fetchEventos = async () => {
@@ -29,10 +36,11 @@ export const NextEvents = () => {
       } finally {
         setLoading(false); // Marca como carregado
       }
-    };
-
+    };  
     fetchEventos(); // Chama a função de requisição
   }, []);
+  
+  // #######################################################################################
 
   // Efeito para filtrar os eventos sempre que o valor de search mudar
   useEffect(() => {
@@ -43,6 +51,12 @@ export const NextEvents = () => {
     setDisplayedEvents(filteredEvents); // Atualiza os eventos filtrados
   }, [search, eventos]); // busca e lista de eventos
 
+  // Função para paginar os eventos
+  const paginate = (events, pageNumber) => {
+    const startIndexPage = (pageNumber - 1) * itemsPerPage; // Índice inicial
+    const endIndexPage = startIndexPage + itemsPerPage; // Índice final
+    return events.slice(startIndexPage, endIndexPage); // Retorna os eventos da página atual
+  };
 
   // Função de reordenação da lista de eventos
   const reorder = (list, startIndex, endIndex) => {
@@ -61,6 +75,12 @@ export const NextEvents = () => {
     const reordered = reorder(displayedEvents, result.source.index, result.destination.index);
     setDisplayedEvents(reordered); // Atualiza o estado com a nova ordem
   };
+
+  // Calcula o número total de páginas
+  const totalPages = Math.ceil(displayedEvents.length / itemsPerPage);
+
+  // Página atual dos eventos
+  const currentEvents = paginate(displayedEvents, currentPage);
 
   if (loading) {
     return <p>Carregando os Eventos...</p>; // Mostra a mensagem de carregamento enquanto os dados não chegam
@@ -91,10 +111,18 @@ export const NextEvents = () => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                  {displayedEvents.map((evento, index) => (
-                  <li key={evento.id}>
-                    <CardEvento evento={evento} index={index} />
-                  </li>
+                  {currentEvents.map((evento, index) => (
+                    <Draggable key={evento.id} draggableId={evento.id.toString()} index={index}>
+                      {(provided) => (
+                        <li 
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <CardEvento evento={evento} />
+                        </li>
+                      )}
+                    </Draggable>
                   ))}
                   {provided.placeholder}
                 </ul>
@@ -103,8 +131,23 @@ export const NextEvents = () => {
           </DragDropContext>
         </section>
       )}
+
+      {/* Controles de paginação */}
+      <div className="pagination">
+        <button 
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+        >
+          <FaChevronLeft />
+        </button>
+        <span>{`Página ${currentPage} de ${totalPages}`}</span>
+        <button 
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+        >
+          <FaChevronRight />
+        </button>
+      </div>
     </div>
   );
 };
-
-// export default NextEvents;
