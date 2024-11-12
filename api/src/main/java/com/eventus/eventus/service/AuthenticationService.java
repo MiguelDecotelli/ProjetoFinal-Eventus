@@ -38,15 +38,15 @@ public class AuthenticationService {
     }
   }
   public ResponseEntity<UserDTO> register(UserDTO data){
+    UserModel userModel = new UserModel();
+    userModel.setUsername(data.getUsername());
+    userModel.setLastname(data.getLastname());
+    userModel.setEmail(data.getEmail());
+    userModel.setBirthday(data.getBirthday());
+    userModel.setName(data.getName());
+    userModel.setRole(UserRole.BASIC);
+    userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
     try {
-      UserModel userModel = new UserModel();
-      userModel.setUsername(data.getUsername());
-      userModel.setLastname(data.getLastname());
-      userModel.setEmail(data.getEmail());
-      userModel.setBirthday(data.getBirthday());
-      userModel.setName(data.getName());
-      userModel.setRole(UserRole.BASIC);
-      userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
       repository.save(userModel);
       data.setRole("BASIC");
       return ResponseEntity.ok(data);
