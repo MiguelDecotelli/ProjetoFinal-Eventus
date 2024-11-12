@@ -84,23 +84,23 @@ export const NextEvents = () => {
       {eventos.length > 0 && ( // Só renderiza o DragDropContext se os eventos não estiverem vazios
         <section>
           <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="eventos" type="list" direction="horizontal">
-                {(provided) => (
-                  <ul 
-                    className="lista-cards"
-                    {...provided.droppableProps}
-                    ref={provided.innerRef}
-                  >
-                    {displayedEvents.map((evento, index) => (
-                    <li key={evento.id}>
-                      <CardEvento evento={evento} index={index} />
-                    </li>
-                    ))}
-                    {provided.placeholder}
-                  </ul>
-                )}
-              </Droppable>
-            </DragDropContext>
+            <Droppable droppableId="eventos" type="list" direction="horizontal">
+              {(provided) => (
+                <ul 
+                  className="list-cards"
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {displayedEvents.map((evento, index) => (
+                  <li key={evento.id}>
+                    <CardEvento evento={evento} index={index} />
+                  </li>
+                  ))}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
         </section>
       )}
     </div>
