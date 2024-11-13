@@ -12,8 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "Users")
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class UserModel implements UserDetails {
 	@Id
@@ -24,7 +24,7 @@ public class UserModel implements UserDetails {
 	@Column(name = "username", nullable = false, unique = true)
 	private String username;
 
-	@Column(name = "password", nullable = false, unique = false)
+	@Column(name = "password", nullable = false, unique = true)
 	private String password;
 
 	@Column(name = "email", nullable = false, unique = true)
@@ -46,7 +46,7 @@ public class UserModel implements UserDetails {
 	private String phoneNumber;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "city", referencedColumnName = "city_id")
+	@JoinColumn(name = "city")
 	private CityModel city;
 
 	@Override

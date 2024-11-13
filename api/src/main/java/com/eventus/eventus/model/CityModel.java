@@ -5,8 +5,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "Cities")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class CityModel {

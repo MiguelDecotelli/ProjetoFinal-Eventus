@@ -2,6 +2,7 @@ package com.eventus.eventus.controller;
 
 import java.util.List;
 
+import com.eventus.eventus.dto.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,11 +32,11 @@ public class CityController {
 		return service.readCityById(id);
 	}
 	@PostMapping
-	public ResponseEntity<CityModel> createCity(@RequestBody CityModel data){
+	public ResponseEntity<CityModel> createCity(@RequestBody CityDTO data){
 		return service.createCity(data);
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<CityModel> updateCity(@PathVariable int id, @RequestBody CityModel data){
+	public ResponseEntity<CityModel> updateCity(@PathVariable int id, @RequestBody CityDTO data){
 		return service.updateCity(id, data);
 	}
 
