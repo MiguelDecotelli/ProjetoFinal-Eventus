@@ -4,8 +4,6 @@ import { Navbar } from '../../components/Navbar';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { FaChevronLeft, FaChevronRight  } from "react-icons/fa6";
 
-import './App.css';
-
 const url = "https://jsonplaceholder.typicode.com/posts/";
 
 export const NextEvents = () => {
@@ -87,12 +85,12 @@ export const NextEvents = () => {
   }
 
   return (
-    <div className='container-eventos'>
+    <div className='container-events'>
 			<Navbar />
-      <h1>Todos os Eventos da Cidade</h1>
+      <h1 className='mt-4 mb-4'>Todos os Eventos da Cidade</h1>
       <div className='search'>
-        <label>
-          <span>Buscar por Eventos:</span>
+        <label className='d-flex flex-column align-items-center gap-3 m-4'>
+          <span className='fs-4 fw-bold'>Buscar por Eventos:</span>
           <input 
             type="search" 
             placeholder='Buscar Evento'
@@ -107,7 +105,7 @@ export const NextEvents = () => {
             <Droppable droppableId="eventos" type="list" direction="horizontal">
               {(provided) => (
                 <ul 
-                  className="list-cards"
+                  className="list-cards d-flex justify-content-around flex-wrap gap-5 p-5 rounded-4"
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
@@ -133,7 +131,7 @@ export const NextEvents = () => {
       )}
 
       {/* Controles de paginação */}
-      <div className="pagination">
+      <div className="pagination d-flex justify-content-center align-items-center mt-4">
         <button 
           onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}

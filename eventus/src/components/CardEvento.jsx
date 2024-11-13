@@ -1,10 +1,9 @@
-import "./CardEvento.css";
 import ImgCard from "../img/banner1.jpg";
 
 export const CardEvento = ({ evento }) => {
 
   return (
-    <div className='card'>
+    <div className='card d-flex flex-column overflow-auto gap-3 p-3 rounded-2'>
       <img src={ImgCard} className="card-img-top" alt="Card image" />
       <h2>Card: {evento.id}</h2>
       <h4>Título: {evento.title}</h4>
