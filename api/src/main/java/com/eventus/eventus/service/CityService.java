@@ -3,6 +3,7 @@ package com.eventus.eventus.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.eventus.eventus.dto.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,12 @@ public class CityService {
 	@Autowired
 	private CityRepository repository;
 
-	public ResponseEntity<CityModel> createCity(CityModel data) {
+	public ResponseEntity<CityModel> createCity(CityDTO data) {
+		CityModel newCity = new CityModel();
+		newCity.setName(data.name());
+		newCity.setState(data.state());
 		try {
-			CityModel city = repository.save(data);
+			CityModel city = repository.save(newCity);
 			return ResponseEntity.ok(city);
 		} catch (Exception e) {
 			return ResponseEntity.internalServerError().build();
@@ -43,12 +47,12 @@ public class CityService {
 		}
 	}
 
-	public ResponseEntity<CityModel> updateCity(int id, CityModel data) {
+	public ResponseEntity<CityModel> updateCity(int id, CityDTO data) {
 		Optional<CityModel> city = repository.findById(id);
 		if (city.isEmpty()) ResponseEntity.notFound().build();
+		city.get().setName(data.name());
+		city.get().setState(data.state());
 		try {
-			city.get().setName(data.getName());
-			city.get().setState(data.getState());
 			CityModel updatedCity = repository.save(city.get());
 			return ResponseEntity.ok(updatedCity);
 		} catch (Exception e) {

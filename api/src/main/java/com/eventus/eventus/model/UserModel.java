@@ -12,8 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "Users")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserModel implements UserDetails {
@@ -47,7 +46,7 @@ public class UserModel implements UserDetails {
 	private String phoneNumber;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "city", referencedColumnName = "city_id")
+	@JoinColumn(name = "city")
 	private CityModel city;
 
 	@Override

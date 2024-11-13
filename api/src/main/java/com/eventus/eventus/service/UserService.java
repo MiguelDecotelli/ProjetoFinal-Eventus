@@ -36,14 +36,14 @@ public class UserService {
         }
     }
     public ResponseEntity<UserDTO> createUser(UserDTO userDTO){
+        UserModel userModel = new UserModel();
+        userModel.setUsername(userDTO.getUsername());
+        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+        userModel.setName(userDTO.getName());
+        userModel.setEmail(userDTO.getEmail());
+        userModel.setBirthday(userDTO.getBirthday());
+        userModel.setLastname(userDTO.getLastname());
         try {
-            UserModel userModel = new UserModel();
-            userModel.setUsername(userDTO.getUsername());
-            userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-            userModel.setName(userDTO.getName());
-            userModel.setEmail(userDTO.getEmail());
-            userModel.setBirthday(userDTO.getBirthday());
-            userModel.setLastname(userDTO.getLastname());
             repository.save(userModel);
             return ResponseEntity.ok(convertToDTO(userModel));
         } catch(DataAccessException e){
@@ -52,11 +52,11 @@ public class UserService {
         }
     }
     public ResponseEntity<UserDTO> updateUser(int id, UserDTO userDTO){
+        Optional<UserModel> userOption = repository.findById(id);
+        if (userOption.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         try {
-            Optional<UserModel> userOption = repository.findById(id);
-            if (userOption.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
             UserModel userModel = new UserModel();
             userModel.setUsername(userDTO.getUsername());
             userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
@@ -91,6 +91,7 @@ public class UserService {
         userDTO.setUsername(userModel.getUsername());
         userDTO.setLastname(userModel.getLastname());
         userDTO.setEmail(userModel.getEmail());
+        userDTO.setCity(userModel.getCity());
         return userDTO;
     }
 }

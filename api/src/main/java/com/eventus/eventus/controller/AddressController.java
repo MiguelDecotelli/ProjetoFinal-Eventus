@@ -2,7 +2,6 @@ package com.eventus.eventus.controller;
 
 import java.util.List;
 
-import com.eventus.eventus.dto.CityDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,34 +13,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.eventus.eventus.model.CityModel;
-import com.eventus.eventus.service.CityService;
+import com.eventus.eventus.model.AddressModel;
+import com.eventus.eventus.service.AddressService;
 
 @RestController
-@RequestMapping("/api/cities")
-public class CityController {
+@RequestMapping("/api/address")
+public class AddressController {
 	@Autowired
-	private CityService service;
-
+	AddressService service;
 	@GetMapping
-	public ResponseEntity<List<CityModel>> getAllCities(){
-		return service.readAllCities();
+	public ResponseEntity<List<AddressModel>> getAllAddress(){
+		return service.readAllAddress();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<CityModel> getCityById(@PathVariable int id){
-		return service.readCityById(id);
+	public ResponseEntity<AddressModel> getAddressById(@PathVariable int id){
+		return service.readAddressById(id);
 	}
 	@PostMapping
-	public ResponseEntity<CityModel> createCity(@RequestBody CityDTO data){
-		return service.createCity(data);
+	public ResponseEntity<AddressModel> postAddress(@RequestBody AddressModel data){
+		return service.createAddress(data);
 	}
 	@PutMapping("/{id}")
-	public ResponseEntity<CityModel> updateCity(@PathVariable int id, @RequestBody CityDTO data){
-		return service.updateCity(id, data);
+	public ResponseEntity<AddressModel> putAddress(@PathVariable int id, @RequestBody AddressModel data){
+		return service.updateAddress(id, data);
 	}
-
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CityModel> deleteCity(@PathVariable int id){
-		return service.deleteCity(id);
+	public ResponseEntity<AddressModel> deleteAddress(@PathVariable int id){
+		return service.deleteAddress(id);
 	}
 }

@@ -1,5 +1,6 @@
 package com.eventus.eventus.dto;
 
+import com.eventus.eventus.model.CityModel;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,4 +15,5 @@ public class UserDTO {
     private String lastname;
     private Date birthday;
     private String role;
+    private CityModel city;
 }

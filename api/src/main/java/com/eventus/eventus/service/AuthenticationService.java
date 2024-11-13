@@ -14,6 +14,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -31,22 +32,23 @@ public class AuthenticationService {
       Authentication authentication = authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword())
       );
-      UserModel user = (UserModel) authentication.getPrincipal();
+      UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
+      UserModel user = repository.findByUsernameAndPassword(authenticatedUser.getUsername(), authenticatedUser.getPassword());
       return ResponseEntity.ok(jwtTokenProvider.generateToken(user));
     }catch(AuthenticationException e){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
   }
   public ResponseEntity<UserDTO> register(UserDTO data){
+    UserModel userModel = new UserModel();
+    userModel.setUsername(data.getUsername());
+    userModel.setLastname(data.getLastname());
+    userModel.setEmail(data.getEmail());
+    userModel.setBirthday(data.getBirthday());
+    userModel.setName(data.getName());
+    userModel.setRole(UserRole.BASIC);
+    userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
     try {
-      UserModel userModel = new UserModel();
-      userModel.setUsername(data.getUsername());
-      userModel.setLastname(data.getLastname());
-      userModel.setEmail(data.getEmail());
-      userModel.setBirthday(data.getBirthday());
-      userModel.setName(data.getName());
-      userModel.setRole(UserRole.BASIC);
-      userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
       repository.save(userModel);
       data.setRole("BASIC");
       return ResponseEntity.ok(data);
