@@ -2,6 +2,7 @@ import { Carousel } from "../../components/Carousel";
 import { Navbar } from "../../components/Navbar";
 
 import { CardEvent } from "../../components/CardEvent";
+import { CardEvento } from "../../components/CardEvento";
 
 export const Home = () => {
 	return (
@@ -11,10 +12,10 @@ export const Home = () => {
 				<Carousel />
 				<h2>Titulo</h2>
 				<section className="d-flex gap-3 align-items-center justify-content-center">
-					<CardEvent />
-					<CardEvent />
-					<CardEvent />
-					<CardEvent />
+					<CardEvento evento={[]}/>
+					<CardEvento evento={[]}/>
+					<CardEvento evento={[]}/>
+					<CardEvento evento={[]}/>
 				</section>
 			</main>
 		</div>
