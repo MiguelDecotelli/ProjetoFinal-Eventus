@@ -1,6 +1,5 @@
 package com.eventus.eventus.service;
 
-import com.eventus.eventus.model.UserModel;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

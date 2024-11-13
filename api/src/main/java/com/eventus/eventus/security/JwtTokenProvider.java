@@ -32,13 +32,15 @@ public class JwtTokenProvider {
   }
   public String generateToken(UserModel user){
     Map<String, Object> claims = new HashMap<>();
-    return createToken(claims, user.getUsername(), user.getId());
+    return createToken(claims, user);
   }
-  private String createToken(Map<String, Object> claims, String subject, int id){
+  private String createToken(Map<String, Object> claims, UserModel user){
+    var role = user.getRole();
     return Jwts.builder()
             .setClaims(claims)
-            .setSubject(subject)
-            .setId(String.valueOf(id))
+            .setSubject(user.getUsername())
+            .setId(String.valueOf(user.getId()))
+            .claim("role", role)
             .setIssuer("api")
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
