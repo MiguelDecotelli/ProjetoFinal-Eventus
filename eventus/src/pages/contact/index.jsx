@@ -1,68 +1,69 @@
 import { Navbar } from "../../components/Navbar";
-import ImgContact from "../../img/contact.jpg";
+import { Input } from "../../components/Input";
+import { TextArea } from "../../components/TextArea";
 
 export const Contact = () => {
 	return (
-		<div className="container ">
+		<div className="container">
 			<Navbar />
-			<main className="row max-w-2xl mx-auto gap-5 p-5">
-				<div className="col">
-					<img
-						src={ImgContact}
-						alt="image-contact"
-						style={{ width: "100%", height: "450px", objectFit: "cover" }}
-					/>
-				</div>
+			<main className="row max-w-2xl mx-auto gap-5 p-5 d-flex flex-column">
+				<h3 className="text-center">Contato</h3>
 
-				<div className="row col mb-4 d-flex flex-column justify-content-center ">
-					<h5 className="text-center display-4 font-weight-bold mb-5">
-						Contato
-					</h5>
-					<div className="col-md-6 d-flex gap-2 align-items-center mb-3">
-						<i className="fa-regular fa-envelope mr-2"></i>
+				<div className="d-flex flex-wrap justify-content-around gap-3 mb-4 w-100">
+					<div
+						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						style={{ width: "280px", height: "100px" }}
+					>
+						<i className="fa-regular fa-envelope mb-2 custom-icon"></i>
 						<span>contato@exemplo.com</span>
 					</div>
-					<div className="col-md-6 d-flex gap-2 align-items-center mb-3">
-						<i className="fa-solid fa-phone mr-2"></i>
+					<div
+						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						style={{ width: "280px", height: "100px" }}
+					>
+						<i className="fa-solid fa-phone mb-2 custom-icon"></i>
 						<span>(11) 1234-5678</span>
 					</div>
-					<div className="col-12 d-flex gap-2 align-items-center mb-3">
-						<i className="fa-solid fa-location-dot mr-2"></i>
-						<span>Rua Exemplo, 123 - Cidade, Estado</span>
+					<div
+						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						style={{ width: "280px", height: "100px" }}
+					>
+						<i className="fa-solid fa-location-dot mb-2 custom-icon"></i>
+						<span>Rua Exemplo, 123</span>
 					</div>
 				</div>
 
-				<form className="col d-flex flex-column justify-content-center">
-					<div className="form-group mb-3">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="Seu nome"
-							required
-						/>
+				<div className="row d-flex mx-auto">
+					<div className="col-12 col-md-6 col-lg-6">
+						<form className="p-4 d-flex flex-column px-2">
+							<Input label="NOME" id="name" placeholder="Seu nome" />
+							<Input
+								label="EMAIL"
+								id="email"
+								type="email"
+								placeholder="Seu email"
+							/>
+							<TextArea
+								label="MENSAGEM"
+								id="message"
+								placeholder="Sua mensagem"
+							/>
+							<button className="btn btn-outline-light mt-4" type="submit">
+								Enviar
+							</button>
+						</form>
 					</div>
-					<div className="form-group mb-3">
-						<input
-							type="email"
-							className="form-control"
-							placeholder="Seu email"
-							required
-						/>
+
+					<div className="col-12 col-md-6 col-lg-6 p-4">
+						<iframe
+							title="Localização Fixa"
+							className="w-100 h-100 px-2"
+							style={{ border: "0" }}
+							src="https://www.openstreetmap.org/export/embed.html?bbox=-46.63534832096004%2C-23.551981945330334%2C-46.62978935241702%2C-23.549335598499232&amp;layer=mapnik&amp;marker=-23.55052%2C-46.633308"
+							allowFullScreen
+						></iframe>
 					</div>
-					<div className="form-group mb-3">
-						<textarea
-							className="form-control"
-							placeholder="Sua mensagem"
-							required
-							rows="3"
-						/>
-					</div>
-					<div className="d-flex justify-content-center">
-						<button type="submit" className="btn btn-outline-light">
-							Enviar mensagem
-						</button>
-					</div>
-				</form>
+				</div>
 			</main>
 		</div>
 	);

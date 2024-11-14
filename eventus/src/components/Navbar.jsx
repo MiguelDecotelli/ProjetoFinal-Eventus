@@ -33,11 +33,6 @@ export function Navbar() {
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="/support">
-								Suporte
-							</Link>
-						</li>
-						<li className="nav-item">
 							<Link className="nav-link text" to="/nextEvents">
 								Proximos eventos
 							</Link>
