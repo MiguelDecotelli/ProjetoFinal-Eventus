@@ -2,21 +2,33 @@ package com.eventus.eventus.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.eventus.eventus.dto.TicketDTO;
+import com.eventus.eventus.dto.TicketUsersDTO;
+import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.model.TicketModel;
+import com.eventus.eventus.model.UserModel;
+import com.eventus.eventus.model.UsersTicketsModel;
 import com.eventus.eventus.repository.TicketRepository;
+import com.eventus.eventus.repository.UsersTicketsRepository;
 
 @Service
 public class TicketService {
 	@Autowired
 	private TicketRepository repository;
+	@Autowired
+	private UsersTicketsRepository usersTicketsRepository;
 	public ResponseEntity<TicketModel> createTicket(TicketDTO data) {
-		TicketModel model = new TicketModel(data.getName(), data.getDescription(), data.getAmount());
+		TicketModel model = new TicketModel();
+		model.setName(data.getName());
+		model.setDescription(data.getDescription());
+		model.setAmount(data.getAmount());
+		model.setEvent(data.getEvent());
 		try {
 			TicketModel ticket = repository.save(model);
 			return ResponseEntity.ok(ticket);
@@ -59,7 +71,7 @@ public class TicketService {
 		}
 	}
 
-	public ResponseEntity deleteTicket(int id) {
+	public ResponseEntity<Object> deleteTicket(int id) {
 		Optional<TicketModel> ticket = repository.findById(id);
 		if(ticket.isEmpty()) return ResponseEntity.notFound().build();
 		try {
@@ -70,11 +82,11 @@ public class TicketService {
 		}
 	}
 	private TicketDTO convertToDTO(TicketModel model){
-		TicketDTO dto = new TicketDTO();
-		dto.setId(model.getId());
-		dto.setName(model.getName());
-		dto.setDescription(model.getDescription());
-		dto.setAmount(model.getAmount());
-		return dto;
+		return new TicketDTO(
+		model.getId(),
+		model.getName(),
+		model.getDescription(),
+		model.getAmount(),
+		model.getEvent());
 	}
 }

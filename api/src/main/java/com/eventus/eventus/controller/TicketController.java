@@ -14,14 +14,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eventus.eventus.dto.TicketDTO;
+import com.eventus.eventus.dto.TicketUsersDTO;
 import com.eventus.eventus.model.TicketModel;
 import com.eventus.eventus.service.TicketService;
+import com.eventus.eventus.service.UsersTicketsService;
 
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
 	@Autowired
 	private TicketService service;
+	@Autowired
+	private UsersTicketsService usersTicketsService;
 	@GetMapping
 	public ResponseEntity<List<TicketDTO>> getAllTickets(){
 		return service.readAllTickets();
@@ -39,7 +43,11 @@ public class TicketController {
 		return service.updateTicket(id, data);
 	}
 	@DeleteMapping("/{id}")
-	public ResponseEntity deleteTicket(@PathVariable int id){
+	public ResponseEntity<Object> deleteTicket(@PathVariable int id){
 		return service.deleteTicket(id);
+	}
+	@GetMapping("/{id}/users")
+	public ResponseEntity<TicketUsersDTO> getAllUsers(@PathVariable int id){
+		return usersTicketsService.getAllUsersByTicket(id);
 	}
 }
