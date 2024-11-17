@@ -21,20 +21,11 @@ html {
 }
 
 body {
-	border: solid blue 1px;
 	font-size: 100%;
 	font-family: "Noto Sans Mahajani", sans-serif;
 	font-weight: 400;
 	background-color: var(--background);
 	color: var(--text);
-}
-
-.container {
-	border: solid red 1px;
-}
-
-main {
-	border: solid yellow 1px;
 }
 
 h1,
@@ -149,22 +140,42 @@ input {
 	z-index: 1;
 }
 
+/* INDEX */
+
+.container-carousel {
+	height: 500vh;
+}
+
+#home-title{
+	background-color: purple;
+}
+
+/* COMPONENTS */
+
+/* CAROUSEL */
+
 .slide {
 	justify-content: center;
 	width: 100%;
-	/* height: 100%; */
-	border: solid green 1px;
+	height: 50rem;
 }
 
 .custom-carousel {
-	/* width: 70rem; */
-	/* max-height: 440px; */
+	width: 100%;
+	height: 45rem;
 	margin: auto;
 }
 
 .custom-carousel img {
 	object-fit: cover;
-	height: 450px;
+	height: 40rem;
+}
+
+/* CardEvents */
+
+.card {
+	border: goldenrod solid 1px;
+	width: 18rem;
 }
 
 .error-message {

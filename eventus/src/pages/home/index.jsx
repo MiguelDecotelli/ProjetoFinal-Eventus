@@ -9,7 +9,13 @@ export const Home = () => {
 			<Navbar />
 			<main className="d-flex flex-column gap-3">
 				<Carousel />
-				<h2>Titulo</h2>
+				<h2 id="home-title">Nossos Eventos</h2>
+				<section className="d-flex gap-3 align-items-center justify-content-center">
+					<CardEvent />
+					<CardEvent />
+					<CardEvent />
+					<CardEvent />
+				</section>
 				<section className="d-flex gap-3 align-items-center justify-content-center">
 					<CardEvent />
 					<CardEvent />
