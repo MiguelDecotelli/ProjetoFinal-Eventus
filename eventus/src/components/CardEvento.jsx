@@ -1,4 +1,5 @@
 import ImgCard from "../img/banner1.jpg";
+import { Link } from "react-router-dom";
 
 export const CardEvento = ({ evento }) => {
 
@@ -10,9 +11,9 @@ export const CardEvento = ({ evento }) => {
       <p>Detalhes: {evento.body}</p>
 
       <div className="d-flex justify-content-center">
-        <a href="#" className="btn btn-orange mx-auto">
-          Go somewhere
-        </a>
+        <Link className="btn btn-orange d-flex justify-content-center" to={`/eventDetail/${evento.id}`}>
+					Ver Detalhes
+				</Link>
       </div>
     </div>
   )
