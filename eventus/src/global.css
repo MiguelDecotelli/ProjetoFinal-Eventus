@@ -285,7 +285,22 @@ input {
   }
   
 
+/* TEXTAREA */
 
+.custom-card {
+	background-color: var(--background) !important;
+	border: 1px solid var(--primary);
+	transition: 1s ease;
+}
+.custom-card:hover {
+	background-color: var(--accent) !important;
+	color: var(--text);
+	border: none;
+}
+
+.custom-icon {
+	font-size: 2rem;
+}
 
 /* MEDIA QUERIES */
 
