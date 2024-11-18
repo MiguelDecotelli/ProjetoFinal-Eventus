@@ -30,7 +30,7 @@ export const Home = () => {
     // Intervalos para trocar os eventos renderizados
     const temporizadorEventos = setInterval(() => {
       pegarEventosAleatorios();
-    }, 5000); // 5000ms = 5 segundos
+    }, 10000); // 10000ms = 10 segundos
 
     // Limpa o intervalo quando o componente for desmontado
     return () => clearInterval(temporizadorEventos);
