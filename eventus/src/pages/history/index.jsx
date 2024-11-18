@@ -1,10 +1,10 @@
 import { Navbar } from "../../components/Navbar";
 
-export const Support = () => {
+export const History = () => {
 	return (
 		<main className="container">
 			<Navbar />
-			<h1>Suporte</h1>
+			<h1>Histórico</h1>
 		</main>
 	);
 };

@@ -142,15 +142,75 @@ input {
 
 /* INDEX */
 
-.container-carousel {
+/* .container-carousel {
 	height: 500vh;
-}
+} */
 
 #home-title{
 	background-color: purple;
 }
 
+/* NAVBAR */
+
+
+/* FOOTER */
+
+.footerPages {
+	background-color: #c36950;
+	/* border-color:orangered; */
+	/* border-style:groove; */
+	margin-top: 2.5rem;
+	/* background-color: var(--background); */
+	padding: .8rem;
+	text-align: center;
+}
+
+.footerImage{
+	max-width: 150px;
+	margin-bottom: 10px;
+}
+
+.footerEmail {
+	color: var(--text);
+	text-decoration: none;
+	font-size: 18px;
+}
+
+.footerIcon {
+	max-width: 30px;
+	transition: transform 0.3s;
+}
+
+.footerSocials {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+	gap: 15px;
+}
+
+
 /* COMPONENTS */
+
+/* NAVBAR */
+
+.search-form {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input {
+    max-width: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .search-form:hover .search-input {
+    max-width: 250px;
+    opacity: 1;
+    margin-right: 1rem; /* Espaço entre o input e o botão */
+  }
 
 /* CAROUSEL */
 
@@ -171,11 +231,15 @@ input {
 	height: 40rem;
 }
 
-/* CardEvents */
+/* CARDEVENTS */
 
 .card {
-	border: goldenrod solid 1px;
-	width: 18rem;
+	display: flex;
+	justify-content: flex-end;
+	margin: 2rem .25rem 0 .25rem;
+	border: black solid .125rem;
+	width: 21rem;
+	gap: 1rem
 }
 
 .error-message {
@@ -187,6 +251,41 @@ input {
 .no-after::after {
 	content: none !important;
 }
+
+/* TEXTITLE / TEXTHOME*/
+
+.TextContainer {
+	background-color: #ffefd5; /* Cor de fundo suave */
+	padding: 2rem 0; /* Espaçamento interno vertical */
+	width: 100%; /* Garante que cubra toda a largura */
+  }
+  
+  .TextInfo {
+	max-width: 1200px; /* Limita a largura do conteúdo */
+	margin: 0 auto; /* Centraliza o conteúdo */
+	padding: 0 1rem; /* Espaçamento interno lateral */
+  }
+  
+  .firstTitle h2, 
+  .secondTitle h2 {
+	font-family: 'Roboto Slab', serif; /* Fonte de destaque */
+	color: #2e8b57; /* Cor vibrante */
+	font-size: 2.5rem; /* Tamanho do título */
+	margin-bottom: 1rem; /* Espaçamento abaixo do título */
+	text-align: center; /* Centraliza o texto */
+  }
+
+  .firstTitle p,
+  .secondTitle p {
+	font-family: 'Open Sans', sans-serif; /* Fonte para o parágrafo */
+	color: #333; /* Cor do texto */
+	font-size: 1.125rem; /* Tamanho legível */
+	line-height: 1.8; /* Melhora o espaçamento entre linhas */
+	text-align: justify; /* Justifica o texto */
+  }
+  
+
+
 
 /* MEDIA QUERIES */
 

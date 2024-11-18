@@ -28,35 +28,29 @@ export function Navbar() {
 						style={{ "--bs-scroll-height": "100px" }}
 					>
 						<li className="nav-item">
-							<Link className="nav-link text" to="/contact">
-								Contato
-							</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link text" to="/support">
-								Suporte
-							</Link>
-						</li>
-						<li className="nav-item">
 							<Link className="nav-link text" to="#">
 								Proximos eventos
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="#">
+							<Link className="nav-link text" to="/news">
 								Novidades
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="#">
+							<Link className="nav-link text" to="/history">
 								Histórico
 							</Link>
 						</li>
+						<li className="nav-item">
+							<Link className="nav-link text" to="/contact">
+								Contato
+							</Link>
+						</li>
 					</ul>
-					<form className="p-2 d-flex justify-content-center" role="search">
+					<form className="search-form p-2 justify-content-center" role="search">
 						<input
-							className="form-control me-2"
-							style={{ maxWidth: "250px" }}
+							className="form-control search-input"
 							type="search"
 							placeholder="O que você procura?"
 							aria-label="Search"
