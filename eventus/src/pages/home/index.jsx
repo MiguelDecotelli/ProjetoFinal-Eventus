@@ -41,7 +41,7 @@ export const Home = () => {
 			<Navbar />
 			<main className="py-2 d-flex flex-column gap-5">
 				<Carousel />
-				<h2>Titulo</h2>
+				<h2 className="mt-5 mb-0">Eventos em Destaque</h2>
 				<section className="d-flex gap-3 align-items-center justify-content-center mb-5">
 					{eventosRenderizados.length > 0 ? (
             eventosRenderizados.map((evento, index) => (

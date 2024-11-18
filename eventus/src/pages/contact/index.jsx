@@ -1,5 +1,4 @@
 import { Navbar } from "../../components/Navbar";
-import { Footer } from "../../components/Footer";
 import ImgContact from "../../img/contact.jpg";
 
 export const Contact = () => {
@@ -65,7 +64,6 @@ export const Contact = () => {
 					</div>
 				</form>
 			</main>
-			<Footer />
 		</div>
 	);
 };

@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 
 import { useContext } from 'react';
 import { DataContext } from '../../context/DataContext';
-import { Footer } from "../../components/Footer";
 
 export const EventDetail = () => {
   const { id } = useParams();  // Pega o parâmetro "id" da URL
@@ -41,7 +40,6 @@ export const EventDetail = () => {
           </div>
         </div>
       </section>
-      <Footer />
     </div>
   )
 }
