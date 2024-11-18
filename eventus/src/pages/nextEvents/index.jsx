@@ -59,6 +59,7 @@ export const NextEvents = () => {
   // Página atual dos eventos
   const currentEvents = paginate(displayedEvents, currentPage);
 
+
   return (
     <div className='container-events'>
 			<Navbar />
