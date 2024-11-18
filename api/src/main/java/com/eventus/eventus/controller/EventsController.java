@@ -21,8 +21,7 @@ public class EventsController {
 
     @GetMapping("/{id}")
     public ResponseEntity<EventsDTO> getEventsById (@PathVariable int id){
-        EventsDTO eventsDTO = eventsService.getEventsById(id).getBody();
-        return eventsDTO != null ? ResponseEntity.ok(eventsDTO) : ResponseEntity.notFound().build();
+        return eventsService.getEventsById(id);
     }
 
     @PostMapping

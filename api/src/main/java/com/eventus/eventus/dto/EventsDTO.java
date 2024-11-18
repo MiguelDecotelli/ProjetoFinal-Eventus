@@ -1,16 +1,36 @@
 package com.eventus.eventus.dto;
 
-import com.eventus.eventus.model.EventsStatus;
-import lombok.Data;
+import java.util.Date;
 
-@Data
-public class EventsDTO {
-    private int id;
-    private String name;
-    private String initialDate;
-    private String finalDate;
-    private String description;
-    private String eventImage;
-    private EventsStatus eventStatus;
-    private String eventAddress;
+import com.eventus.eventus.model.AddressModel;
+import com.eventus.eventus.model.EventsStatus;
+
+public record EventsDTO(int id, String name, Date initialDate, Date finalDate,
+		String description, String eventImage, EventsStatus eventStatus,
+		int eventAddress){
+
+	public int getId() {
+		return id;
+	}
+	public String getName() {
+		return name;
+	}
+	public Date getInitialDate() {
+		return initialDate;
+	}
+	public Date getFinalDate() {
+		return finalDate;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public String getEventImage() {
+		return eventImage;
+	}
+	public EventsStatus getEventStatus() {
+		return eventStatus;
+	}
+	public int getEventAddress() {
+		return eventAddress;
+	}
 }

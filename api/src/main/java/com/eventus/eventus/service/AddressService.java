@@ -49,7 +49,7 @@ public class AddressService {
 				address.get().setStreetNumber(data.getStreetNumber());
 				address.get().setComplement(data.getComplement());
 				address.get().setDescription(data.getDescription());
-				var updatedAddress = repository.save(address.get());
+				AddressModel updatedAddress = repository.save(address.get());
 				return ResponseEntity.ok(updatedAddress);
 			} catch (Exception e) {
 				return ResponseEntity.internalServerError().build();

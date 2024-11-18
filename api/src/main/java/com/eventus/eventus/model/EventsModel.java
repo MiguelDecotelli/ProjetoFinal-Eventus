@@ -1,41 +1,136 @@
 package com.eventus.eventus.model;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import java.util.Set;
+import java.util.Date;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
-@Table(name="Events")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "Events")
 public class EventsModel {
-    @Id
-    @Column(name="id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+	@Id
+	@Column(name = "id")
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int id;
 
-    @Column(name="name", nullable = false, unique = true)
-    private String name;
+	@Column(name = "name", nullable = false, unique = true)
+	private String name;
 
-    @Column(name="initial_date")
-    private String initialDate;
+	@Column(name = "initial_date")
+	private Date initialDate;
 
-    @Column(name="final_date")
-    private String finalDate;
+	@Column(name = "final_date")
+	private Date finalDate;
 
-    @Column(name="description")
-    private String description;
+	@Column(name = "description")
+	private String description;
 
-    @Column(name="event_image")
-    private String eventImage;
+	@Column(name = "image")
+	private String eventImage;
 
-    @Column(name="event_status")
-    private EventsStatus eventStatus;
+	@Column(name = "status")
+	private EventsStatus eventStatus;
 
-    @Column(name="eventAddress_EventAddress_id", nullable = false)
-    private String eventAddress;
+	@ManyToOne
+	@JoinColumn(name = "Address_id")
+	private AddressModel eventAddress;
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Users_id")
+	private Set<UserModel> admins;
+
+	public EventsModel(){}
+	public EventsModel(int id, String name, Date initialDate, Date finalDate, String description, String eventImage, EventsStatus eventStatus, AddressModel eventAddress, Set<UserModel> admins) {
+		this.id = id;
+		this.name = name;
+		this.initialDate = initialDate;
+		this.finalDate = finalDate;
+		this.description = description;
+		this.eventImage = eventImage;
+		this.eventStatus = eventStatus;
+		this.eventAddress = eventAddress;
+		this.admins = admins;
+	}
+
+	// Getters and Setters
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Date getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(Date initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public Date getFinalDate() {
+		return finalDate;
+	}
+
+	public void setFinalDate(Date finalDate) {
+		this.finalDate = finalDate;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getEventImage() {
+		return eventImage;
+	}
+
+	public void setEventImage(String eventImage) {
+		this.eventImage = eventImage;
+	}
+
+	public EventsStatus getEventStatus() {
+		return eventStatus;
+	}
+
+	public void setEventStatus(EventsStatus eventStatus) {
+		this.eventStatus = eventStatus;
+	}
+
+	public AddressModel getEventAddress() {
+		return eventAddress;
+	}
+
+	public void setEventAddress(AddressModel eventAddress) {
+		this.eventAddress = eventAddress;
+	}
+
+	public Set<UserModel> getAdmins() {
+		return admins;
+	}
+
+	public void setAdmins(Set<UserModel> admins) {
+		this.admins = admins;
+	}
 }

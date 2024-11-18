@@ -84,14 +84,17 @@ public class UserService {
             return ResponseEntity.internalServerError().build();
         }
     }
-    private UserDTO convertToDTO(UserModel userModel){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(userModel.getId());
-        userDTO.setName(userModel.getName());
-        userDTO.setUsername(userModel.getUsername());
-        userDTO.setLastname(userModel.getLastname());
-        userDTO.setEmail(userModel.getEmail());
-        userDTO.setCity(userModel.getCity());
-        return userDTO;
+    private UserDTO convertToDTO(UserModel model){
+        return new UserDTO(
+					model.getId(),
+					model.getUsername(),
+					model.getPassword(),
+					model.getEmail(),
+					model.getName(),
+					model.getLastname(),
+					model.getBirthday(),
+					model.getRole().getRole(),
+					model.getCity()
+				);
     }
 }
