@@ -4,7 +4,6 @@ public record CityDTO(String name, String state) {
 	public String getName() {
 		return name;
 	}
-
 	public String getState() {
 		return state;
 	}

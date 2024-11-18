@@ -1,6 +1,7 @@
 package com.eventus.eventus.service;
 
 import com.eventus.eventus.dto.EventsDTO;
+import com.eventus.eventus.dto.NewEventsDTO;
 import com.eventus.eventus.model.AddressModel;
 import com.eventus.eventus.model.EventsModel;
 import com.eventus.eventus.repository.AddressRepository;
@@ -43,7 +44,7 @@ public class EventsService {
 		}
 	}
 
-	public ResponseEntity<EventsDTO> createEvents(EventsDTO eventsDTO){
+	public ResponseEntity<EventsDTO> createEvents(NewEventsDTO eventsDTO){
         EventsModel eventsModel = new EventsModel();
         eventsModel.setId(eventsDTO.getId());
         eventsModel.setName(eventsDTO.getName());
@@ -63,7 +64,7 @@ public class EventsService {
         }
     }
 
-	public ResponseEntity<EventsDTO> updateEvents(int id, EventsDTO eventsDTO) {
+	public ResponseEntity<EventsDTO> updateEvents(int id, NewEventsDTO eventsDTO) {
 		Optional<EventsModel> eventsOption = repository.findById(id);
 		if (eventsOption.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -84,7 +85,7 @@ public class EventsService {
 		}
 	}
 
-	public ResponseEntity deleteEvents(int id) {
+	public ResponseEntity<Object> deleteEvents(int id) {
 		Optional<EventsModel> eventsOption = repository.findById(id);
 		if (eventsOption.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -111,6 +112,7 @@ public class EventsService {
 				model.getDescription(),
 				model.getEventImage(),
 				model.getEventStatus(),
-				model.getEventAddress().getId());
+				model.getEventAddress()
+			);
 	}
 }

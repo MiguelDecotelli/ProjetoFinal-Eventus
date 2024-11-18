@@ -1,6 +1,7 @@
 package com.eventus.eventus.controller;
 
 import com.eventus.eventus.dto.EventsDTO;
+import com.eventus.eventus.dto.NewEventsDTO;
 import com.eventus.eventus.service.EventsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,20 +26,17 @@ public class EventsController {
     }
 
     @PostMapping
-    public EventsDTO createEvents (@RequestBody EventsDTO eventsDTO){
-        return eventsService.createEvents(eventsDTO).getBody();
+    public ResponseEntity<EventsDTO> createEvents (@RequestBody NewEventsDTO eventsDTO){
+        return eventsService.createEvents(eventsDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<EventsDTO> updateEvents (@PathVariable int id, @RequestBody EventsDTO eventsDTO){
-        EventsDTO updateEvents = eventsService.updateEvents(id, eventsDTO).getBody();
-        return updateEvents != null ? ResponseEntity.ok(updateEvents) : ResponseEntity.notFound().build();
+    public ResponseEntity<EventsDTO> updateEvents (@PathVariable int id, @RequestBody NewEventsDTO eventsDTO){
+        return eventsService.updateEvents(id, eventsDTO);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEvents(@PathVariable int id){
-        // TODO: Make response to this
-        eventsService.deleteEvents(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Object> deleteEvents(@PathVariable int id){
+        return eventsService.deleteEvents(id);
     }
 }
