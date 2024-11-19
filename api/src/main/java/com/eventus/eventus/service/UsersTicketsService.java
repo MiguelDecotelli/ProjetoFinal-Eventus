@@ -7,11 +7,15 @@ import org.springframework.stereotype.Service;
 import com.eventus.eventus.repository.TicketRepository;
 import com.eventus.eventus.repository.UserRepository;
 import com.eventus.eventus.repository.UsersTicketsRepository;
+import com.eventus.eventus.dto.CityDTO;
+import com.eventus.eventus.dto.EventsDTO;
 import com.eventus.eventus.dto.TicketDTO;
 import com.eventus.eventus.dto.TicketUsersDTO;
 import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.dto.UserTicketDTO;
 import com.eventus.eventus.dto.UserTicketsDTO;
+import com.eventus.eventus.model.CityModel;
+import com.eventus.eventus.model.EventsModel;
 import com.eventus.eventus.model.TicketModel;
 import com.eventus.eventus.model.UserModel;
 import com.eventus.eventus.model.UsersTicketsModel;
@@ -144,13 +148,13 @@ public class UsersTicketsService {
 		return new UserDTO(
 				model.getId(),
 				model.getUsername(),
-				model.getPassword(),
+				"",
 				model.getEmail(),
 				model.getName(),
 				model.getLastname(),
 				model.getBirthday(),
 				model.getRole().getRole(),
-				model.getCity());
+				convertCityModelToCityDTO(model.getCity()));
 	}
 	private TicketDTO convertTicketModelToTicketDto(TicketModel model){
 		return new TicketDTO(
@@ -158,6 +162,22 @@ public class UsersTicketsService {
 				model.getName(),
 				model.getDescription(),
 				model.getAmount(),
-				model.getEvent());
+				convertEventsModelToEventsDTO(model.getEvent())
+			);
+	}
+	private CityDTO convertCityModelToCityDTO(CityModel model){
+		return new CityDTO(model.getName(), model.getState());
+	}
+	private EventsDTO convertEventsModelToEventsDTO(EventsModel model){
+		return new EventsDTO(
+				model.getId(),
+				model.getName(),
+				model.getInitialDate(),
+				model.getFinalDate(),
+				model.getDescription(),
+				model.getEventImage(),
+				model.getEventStatus(),
+				model.getEventAddress()
+			);
 	}
 }

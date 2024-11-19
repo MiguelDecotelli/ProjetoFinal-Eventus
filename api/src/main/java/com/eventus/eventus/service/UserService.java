@@ -1,15 +1,14 @@
 package com.eventus.eventus.service;
 
+import com.eventus.eventus.dto.CityDTO;
 import com.eventus.eventus.dto.UserDTO;
+import com.eventus.eventus.model.CityModel;
 import com.eventus.eventus.model.UserModel;
-import com.eventus.eventus.model.UserRole;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -88,13 +87,16 @@ public class UserService {
         return new UserDTO(
 					model.getId(),
 					model.getUsername(),
-					model.getPassword(),
+					"",
 					model.getEmail(),
 					model.getName(),
 					model.getLastname(),
 					model.getBirthday(),
 					model.getRole().getRole(),
-					model.getCity()
+					convertCityModelToCityDTO(model.getCity())
 				);
     }
+	private CityDTO convertCityModelToCityDTO(CityModel model){
+		return new CityDTO(model.getName(), model.getState());
+	}
 }

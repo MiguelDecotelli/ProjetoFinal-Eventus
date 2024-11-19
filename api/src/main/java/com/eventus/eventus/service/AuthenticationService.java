@@ -1,6 +1,7 @@
 package com.eventus.eventus.service;
 
 import com.eventus.eventus.dto.AuthenticationDTO;
+import com.eventus.eventus.dto.CityDTO;
 import com.eventus.eventus.dto.RegistrationDTO;
 import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.model.CityModel;
@@ -52,11 +53,14 @@ public class AuthenticationService {
     userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
     try {
       UserModel savedUser = repository.save(userModel);
-			UserDTO user = new UserDTO(savedUser.getId(), savedUser.getUsername(), savedUser.getPassword(), savedUser.getEmail(), savedUser.getName(), savedUser.getLastname(), savedUser.getBirthday(), savedUser.getRole().getRole(), savedUser.getCity());
+			UserDTO user = new UserDTO(savedUser.getId(), savedUser.getUsername(), savedUser.getPassword(), savedUser.getEmail(), savedUser.getName(), savedUser.getLastname(), savedUser.getBirthday(), savedUser.getRole().getRole(), convertCityModelToCityDTO(savedUser.getCity()));
       return ResponseEntity.ok(user);
     } catch (DataAccessException e){
       System.out.println(e);
       return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
   }
+	private CityDTO convertCityModelToCityDTO(CityModel model){
+		return new CityDTO(model.getName(), model.getState());
+	}
 }

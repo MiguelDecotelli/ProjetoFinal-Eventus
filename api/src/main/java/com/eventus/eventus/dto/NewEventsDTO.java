@@ -2,12 +2,11 @@ package com.eventus.eventus.dto;
 
 import java.util.Date;
 
-import com.eventus.eventus.model.AddressModel;
 import com.eventus.eventus.model.EventsStatus;
 
-public record EventsDTO(int id, String name, Date initialDate, Date finalDate,
+public record NewEventsDTO(int id, String name, Date initialDate, Date finalDate,
 		String description, String eventImage, EventsStatus eventStatus,
-		AddressModel eventAddress){
+		int eventAddress){
 
 	public int getId() {
 		return id;
@@ -30,7 +29,7 @@ public record EventsDTO(int id, String name, Date initialDate, Date finalDate,
 	public EventsStatus getEventStatus() {
 		return eventStatus;
 	}
-	public AddressModel getEventAddress() {
+	public int getEventAddress() {
 		return eventAddress;
 	}
 }

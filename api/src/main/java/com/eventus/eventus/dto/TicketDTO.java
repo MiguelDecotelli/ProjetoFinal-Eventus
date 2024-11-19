@@ -1,8 +1,6 @@
 package com.eventus.eventus.dto;
 
-import com.eventus.eventus.model.EventsModel;
-
-public record TicketDTO(int id,String name,String description,int amount, EventsModel event){
+public record TicketDTO(int id,String name,String description,int amount, EventsDTO event){
 	public int getId() {
 		return id;
 	}
@@ -15,7 +13,7 @@ public record TicketDTO(int id,String name,String description,int amount, Events
 	public int getAmount() {
 		return amount;
 	}
-	public EventsModel getEvent() {
+	public EventsDTO getEvent() {
 		return event;
 	}
 }

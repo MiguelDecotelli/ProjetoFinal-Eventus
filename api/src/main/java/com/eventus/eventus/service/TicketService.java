@@ -2,33 +2,30 @@ package com.eventus.eventus.service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.eventus.eventus.dto.EventsDTO;
 import com.eventus.eventus.dto.TicketDTO;
-import com.eventus.eventus.dto.TicketUsersDTO;
-import com.eventus.eventus.dto.UserDTO;
+import com.eventus.eventus.model.EventsModel;
 import com.eventus.eventus.model.TicketModel;
-import com.eventus.eventus.model.UserModel;
-import com.eventus.eventus.model.UsersTicketsModel;
+import com.eventus.eventus.repository.EventsRepository;
 import com.eventus.eventus.repository.TicketRepository;
-import com.eventus.eventus.repository.UsersTicketsRepository;
 
 @Service
 public class TicketService {
 	@Autowired
 	private TicketRepository repository;
 	@Autowired
-	private UsersTicketsRepository usersTicketsRepository;
+	private EventsRepository eventsRepository;
 	public ResponseEntity<TicketModel> createTicket(TicketDTO data) {
 		TicketModel model = new TicketModel();
 		model.setName(data.getName());
 		model.setDescription(data.getDescription());
 		model.setAmount(data.getAmount());
-		model.setEvent(data.getEvent());
+		model.setEvent(eventsRepository.findById(data.getEvent().getId()).get());
 		try {
 			TicketModel ticket = repository.save(model);
 			return ResponseEntity.ok(ticket);
@@ -87,6 +84,19 @@ public class TicketService {
 		model.getName(),
 		model.getDescription(),
 		model.getAmount(),
-		model.getEvent());
+		convertEventsModelToEventsDTO(model.getEvent())
+		);
+	}
+	private EventsDTO convertEventsModelToEventsDTO(EventsModel model){
+		return new EventsDTO(
+				model.getId(),
+				model.getName(),
+				model.getInitialDate(),
+				model.getFinalDate(),
+				model.getDescription(),
+				model.getEventImage(),
+				model.getEventStatus(),
+				model.getEventAddress()
+			);
 	}
 }

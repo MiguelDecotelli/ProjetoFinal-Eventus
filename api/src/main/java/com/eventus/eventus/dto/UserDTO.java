@@ -1,10 +1,8 @@
 package com.eventus.eventus.dto;
 
-import com.eventus.eventus.model.CityModel;
-
 import java.util.Date;
 
-public record UserDTO ( int id, String username, String password, String email, String name, String lastname, Date birthday, String role, CityModel city){
+public record UserDTO (int id, String username, String password, String email, String name, String lastname, Date birthday, String role, CityDTO city){
 	public int getId() {
 		return id;
 	}
@@ -29,7 +27,7 @@ public record UserDTO ( int id, String username, String password, String email, 
 	public String getRole() {
 		return role;
 	}
-	public CityModel getCity() {
+	public CityDTO getCity() {
 		return city;
 	}
 }
