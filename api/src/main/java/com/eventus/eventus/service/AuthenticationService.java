@@ -51,9 +51,21 @@ public class AuthenticationService {
     userModel.setName(data.getName());
     userModel.setRole(UserRole.BASIC);
     userModel.setPassword(new BCryptPasswordEncoder().encode(data.getPassword()));
+		userModel.setCity(null);
     try {
       UserModel savedUser = repository.save(userModel);
-			UserDTO user = new UserDTO(savedUser.getId(), savedUser.getUsername(), savedUser.getPassword(), savedUser.getEmail(), savedUser.getName(), savedUser.getLastname(), savedUser.getBirthday(), savedUser.getRole().getRole(), convertCityModelToCityDTO(savedUser.getCity()));
+			CityDTO city = savedUser.getCity() != null ? convertCityModelToCityDTO(savedUser.getCity()) : null ;
+			UserDTO user = new UserDTO(
+					savedUser.getId(),
+					savedUser.getUsername(), 
+					savedUser.getPassword(), 
+					savedUser.getEmail(), 
+					savedUser.getName(), 
+					savedUser.getLastname(), 
+					savedUser.getBirthday(), 
+					savedUser.getRole().getRole(), 
+					city
+				);
       return ResponseEntity.ok(user);
     } catch (DataAccessException e){
       System.out.println(e);

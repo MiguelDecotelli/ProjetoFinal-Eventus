@@ -1,10 +1,15 @@
 package com.eventus.eventus.security;
 
 import com.eventus.eventus.model.UserModel;
+import com.eventus.eventus.repository.UserRepository;
+import com.eventus.eventus.service.UserService;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +23,8 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
   private final JwtTokenProvider jwtTokenProvider;
   private final UserDetailsService userDetailsService;
+	@Autowired
+	private UserRepository repository;
 
   public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService){
     this.jwtTokenProvider = jwtTokenProvider;
@@ -32,10 +39,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       return;
     }
     String jwt = authHeader.substring(7);
-    String username = jwtTokenProvider.extractUsername(jwt);
+    // String username = jwtTokenProvider.extractUsername(jwt);
+		String id = jwtTokenProvider.extractId(jwt);
     UserModel user = null;
-    if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-      user = (UserModel) userDetailsService.loadUserByUsername(username);
+    if(id != null && SecurityContextHolder.getContext().getAuthentication() == null){
+      user = repository.findById(Integer.valueOf(id)).get();
     }
     UsernamePasswordAuthenticationToken authToken = null;
     if(jwtTokenProvider.isTokenValid(jwt, user)){
