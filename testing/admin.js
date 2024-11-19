@@ -7,4 +7,5 @@ async function login(){
 	);
 	return response.data;
 }
+
 export default login;

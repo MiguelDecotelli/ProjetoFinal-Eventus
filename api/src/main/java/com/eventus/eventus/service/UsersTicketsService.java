@@ -162,22 +162,10 @@ public class UsersTicketsService {
 				model.getName(),
 				model.getDescription(),
 				model.getAmount(),
-				convertEventsModelToEventsDTO(model.getEvent())
+				model.getEvent().getId()
 			);
 	}
 	private CityDTO convertCityModelToCityDTO(CityModel model){
 		return new CityDTO(model.getName(), model.getState());
-	}
-	private EventsDTO convertEventsModelToEventsDTO(EventsModel model){
-		return new EventsDTO(
-				model.getId(),
-				model.getName(),
-				model.getInitialDate(),
-				model.getFinalDate(),
-				model.getDescription(),
-				model.getEventImage(),
-				model.getEventStatus(),
-				model.getEventAddress()
-			);
 	}
 }
