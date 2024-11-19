@@ -1,31 +1,37 @@
 import { Navbar } from "../../components/Navbar";
 import { Input } from "../../components/Input";
 import { TextArea } from "../../components/TextArea";
+import { Footer } from "../../components/Footer";
 
 export const Contact = () => {
+
+	const EmailSent = () => {
+		alert("Email enviado com sucesso. Em breve entraremos em contato")
+	}
+
 	return (
-		<div className="container">
+		<div className="container-contact">
 			<Navbar />
-			<main className="row max-w-2xl mx-auto gap-5 p-5 d-flex flex-column">
+			<div className="row max-w-2xl mx-auto gap-5 p-5 d-flex flex-column contact-box">
 				<h3 className="text-center">Contato</h3>
 
 				<div className="d-flex flex-wrap justify-content-around gap-3 mb-4 w-100">
 					<div
-						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						className="card rounded-2 d-flex align-items-center justify-content-center p-3 custom-card"
 						style={{ width: "280px", height: "100px" }}
 					>
 						<i className="fa-regular fa-envelope mb-2 custom-icon"></i>
-						<span>contato@exemplo.com</span>
+						<span>eventusmaisprati@gmail.com</span>
 					</div>
 					<div
-						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						className="card rounded-2 d-flex align-items-center justify-content-center p-3 custom-card"
 						style={{ width: "280px", height: "100px" }}
 					>
 						<i className="fa-solid fa-phone mb-2 custom-icon"></i>
-						<span>(11) 1234-5678</span>
+						<span>(51) 1234-5678</span>
 					</div>
 					<div
-						className="card rounded-0 d-flex align-items-center justify-content-center p-3 custom-card"
+						className="card rounded-2 d-flex align-items-center justify-content-center p-3 custom-card"
 						style={{ width: "280px", height: "100px" }}
 					>
 						<i className="fa-solid fa-location-dot mb-2 custom-icon"></i>
@@ -35,7 +41,7 @@ export const Contact = () => {
 
 				<div className="row d-flex mx-auto">
 					<div className="col-12 col-md-6 col-lg-6">
-						<form className="p-4 d-flex flex-column px-2">
+						<form onSubmit={EmailSent} className="p-4 d-flex flex-column px-2">
 							<Input label="NOME" id="name" placeholder="Seu nome" />
 							<Input
 								label="EMAIL"
@@ -64,7 +70,8 @@ export const Contact = () => {
 						></iframe>
 					</div>
 				</div>
-			</main>
+			</div>
+			<Footer />
 		</div>
 	);
 };

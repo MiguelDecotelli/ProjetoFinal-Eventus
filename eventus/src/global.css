@@ -146,42 +146,31 @@ input {
 	height: 500vh;
 } */
 
-#home-title{
-	background-color: purple;
-}
-
-/* NAVBAR */
-
 
 /* FOOTER */
 
 .footerPages {
-	background-color: #c36950;
-	/* border-color:orangered; */
-	/* border-style:groove; */
+	background-color: whitesmoke;
+	border-color:orangered;
+	border-style:groove;
 	margin-top: 2.5rem;
-	/* background-color: var(--background); */
 	padding: .8rem;
 	text-align: center;
 }
 
 .footerImage{
-	max-width: 150px;
+	max-width: 135px;
 	margin-bottom: 10px;
 }
 
 .footerEmail {
-	color: var(--text);
+	color: black;
 	text-decoration: none;
 	font-size: 18px;
 }
 
-.footerIcon {
-	max-width: 30px;
-	transition: transform 0.3s;
-}
-
 .footerSocials {
+	color: #050505;
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
@@ -192,6 +181,10 @@ input {
 /* COMPONENTS */
 
 /* NAVBAR */
+
+.navColor:hover {
+	color: var(--accent);
+}
 
 .search-form {
     position: relative;
@@ -209,8 +202,20 @@ input {
   .search-form:hover .search-input {
     max-width: 250px;
     opacity: 1;
-    margin-right: 1rem; /* Espaço entre o input e o botão */
+    margin-right: 1rem;
   }
+
+  .signupColor:hover{
+	background-color: var(--accent);
+	border-color: black;
+  }
+
+  .loginColor:hover {
+	background-color: var(--accent);
+	color: whitesmoke;
+	border-color: whitesmoke;
+  }
+
 
 /* CAROUSEL */
 
@@ -228,7 +233,7 @@ input {
 
 .custom-carousel img {
 	object-fit: cover;
-	height: 40rem;
+	height: 45rem;
 }
 
 /* CARDEVENTS */
@@ -252,55 +257,133 @@ input {
 	content: none !important;
 }
 
+/* IMAGEHOME */
+
+.imageHome {
+	max-height: 840px;
+}
+
 /* TEXTITLE / TEXTHOME*/
 
 .TextContainer {
-	background-color: #ffefd5; /* Cor de fundo suave */
-	padding: 2rem 0; /* Espaçamento interno vertical */
-	width: 100%; /* Garante que cubra toda a largura */
+	/* border-color:orangered; */
+	/* border: solid orangered .2rem; */
+	background-color: whitesmoke;
+	padding: 2rem 0;
+	width: 100%; 
   }
   
   .TextInfo {
-	max-width: 1200px; /* Limita a largura do conteúdo */
-	margin: 0 auto; /* Centraliza o conteúdo */
-	padding: 0 1rem; /* Espaçamento interno lateral */
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
   }
   
   .firstTitle h2, 
   .secondTitle h2 {
-	font-family: 'Roboto Slab', serif; /* Fonte de destaque */
-	color: #2e8b57; /* Cor vibrante */
-	font-size: 2.5rem; /* Tamanho do título */
-	margin-bottom: 1rem; /* Espaçamento abaixo do título */
-	text-align: center; /* Centraliza o texto */
+	font-family: 'Roboto Slab', serif;
+	color: var(--accent);
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+	text-align: center;
   }
 
   .firstTitle p,
   .secondTitle p {
-	font-family: 'Open Sans', sans-serif; /* Fonte para o parágrafo */
-	color: #333; /* Cor do texto */
-	font-size: 1.125rem; /* Tamanho legível */
-	line-height: 1.8; /* Melhora o espaçamento entre linhas */
-	text-align: justify; /* Justifica o texto */
+	font-family: 'Open Sans', sans-serif;
+	color: black;
+	font-size: 1.125rem;
+	line-height: 1.8; 
+	text-align: justify;
   }
+
   
 
-/* TEXTAREA */
+/* PAGES */
 
+/* CONTACT */
+
+.contact-box {
+	width: 85%;
+	background-color: var(--background);
+	border-radius: 20px;
+	border: solid var(--accent) .2rem;
+}
 .custom-card {
 	background-color: var(--background) !important;
 	border: 1px solid var(--primary);
+	color: whitesmoke;
 	transition: 1s ease;
 }
 .custom-card:hover {
 	background-color: var(--accent) !important;
-	color: var(--text);
+	color: black;
 	border: none;
+	cursor: pointer;
 }
 
 .custom-icon {
 	font-size: 2rem;
 }
+
+.custom-mail {
+	color: black;
+}
+
+/* NEXT EVENTS */
+
+/* .container-events {
+	max-width: 1280px;
+	margin: 0 auto;
+	text-align: center;  
+	margin-bottom: 30px;
+  }
+  .search label input {
+	font-size: 20px;
+	text-align: left;
+	width: 80%;
+	padding: 10px;
+	border: 1px solid var(--primary);
+	border-radius: 15px;
+	background-color: var(--background);
+  }
+  .list-cards {
+	background-color: var(--accent);
+  }
+  .pagination button {
+	margin: 0 10px;
+	padding: 5px 15px;
+	font-size: 16px;
+	cursor: pointer;
+	border: none;
+	background-color: var(--accent);
+	color: var(--text);
+	border-radius: 5px;
+  }
+  .pagination button:disabled {
+	background-color: var(--text);
+	cursor: not-allowed;
+  }
+
+  .card{
+	  width: 300px;
+	  height: 450px;
+	  background-color: #2e2e2e;
+	color: #f1e4e6;
+  }
+  .card::-webkit-scrollbar {
+	padding: 20px;
+	width: 12px;
+	background-color: #2e2e2e;
+	border: 5px solid #2e2e2e;
+	border-radius: 50px;
+  }
+  .card::-webkit-scrollbar-thumb{
+	background-color: #c36950;
+	border-radius: 50px;
+	border: 2px solid #2e2e2e;
+  }
+   */
 
 /* MEDIA QUERIES */
 

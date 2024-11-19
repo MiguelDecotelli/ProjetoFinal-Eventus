@@ -1,0 +1,30 @@
+/* * {
+    margin: 0 auto;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    gap: 1rem;
+    width: 300px;
+    height: 450px;
+    padding: 20px;
+    background-color: #2e2e2e;
+    color: #f1e4e6;
+    border-radius: 10px;
+  }
+
+  .card::-webkit-scrollbar {
+    padding: 20px;
+    width: 12px;
+    background-color: #2e2e2e;
+    border: 5px solid #2e2e2e;
+    border-radius: 50px;
+  }
+  .card::-webkit-scrollbar-thumb{
+    background-color: #c36950;
+    border-radius: 50px;
+    border: 2px solid #2e2e2e;
+  } */

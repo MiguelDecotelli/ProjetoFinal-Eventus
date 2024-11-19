@@ -28,22 +28,22 @@ export function Navbar() {
 						style={{ "--bs-scroll-height": "100px" }}
 					>
 						<li className="nav-item">
-							<Link className="nav-link text" to="#">
+							<Link className="nav-link text navColor" to="/nextEvents">
 								Proximos eventos
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="/news">
+							<Link className="nav-link text navColor" to="/news">
 								Novidades
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="/history">
+							<Link className="nav-link text navColor" to="/history">
 								Histórico
 							</Link>
 						</li>
 						<li className="nav-item">
-							<Link className="nav-link text" to="/contact">
+							<Link className="nav-link text navColor" to="/contact">
 								Contato
 							</Link>
 						</li>
@@ -69,11 +69,11 @@ export function Navbar() {
 						</div>
 					) : (
 						<div className="p-2 d-flex justify-content-center gap-2">
-							<button type="button" className="btn btn-outline-light">
+							<button type="button" className="btn btn-outline-light signupColor">
 								<NavLink to="/signup">Cadastrar</NavLink>
 							</button>
 
-							<button type="button" className="btn btn-light">
+							<button type="button" className="btn btn-light loginColor">
 								<NavLink to="/login">Entrar</NavLink>
 							</button>
 						</div>
