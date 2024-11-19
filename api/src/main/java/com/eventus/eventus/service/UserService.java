@@ -4,6 +4,7 @@ import com.eventus.eventus.dto.CityDTO;
 import com.eventus.eventus.dto.UserDTO;
 import com.eventus.eventus.model.CityModel;
 import com.eventus.eventus.model.UserModel;
+import com.eventus.eventus.model.UserRole;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -42,8 +43,9 @@ public class UserService {
         userModel.setEmail(userDTO.getEmail());
         userModel.setBirthday(userDTO.getBirthday());
         userModel.setLastname(userDTO.getLastname());
+        userModel.setRole(UserRole.valueOf(userDTO.getRole()));
         try {
-            repository.save(userModel);
+            userModel = repository.save(userModel);
             return ResponseEntity.ok(convertToDTO(userModel));
         } catch(DataAccessException e){
             System.out.println(e);
@@ -56,13 +58,14 @@ public class UserService {
             return ResponseEntity.notFound().build();
         }
         try {
-            UserModel userModel = new UserModel();
+            UserModel userModel = userOption.get();
             userModel.setUsername(userDTO.getUsername());
             userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
             userModel.setName(userDTO.getName());
             userModel.setEmail(userDTO.getEmail());
             userModel.setBirthday(userDTO.getBirthday());
             userModel.setLastname(userDTO.getLastname());
+            userModel.setRole(UserRole.valueOf(userDTO.getRole()));
             repository.save(userModel);
             return ResponseEntity.ok(convertToDTO(userModel));
         } catch (DataAccessException e){
@@ -84,6 +87,7 @@ public class UserService {
         }
     }
     private UserDTO convertToDTO(UserModel model){
+			CityDTO city = model.getCity() != null ? convertCityModelToCityDTO(model.getCity()) : null;
         return new UserDTO(
 					model.getId(),
 					model.getUsername(),
@@ -93,7 +97,7 @@ public class UserService {
 					model.getLastname(),
 					model.getBirthday(),
 					model.getRole().getRole(),
-					convertCityModelToCityDTO(model.getCity())
+					city
 				);
     }
 	private CityDTO convertCityModelToCityDTO(CityModel model){
