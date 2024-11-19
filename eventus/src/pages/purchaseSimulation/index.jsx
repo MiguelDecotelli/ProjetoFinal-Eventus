@@ -1,12 +1,32 @@
+import React from "react";
+import { useParams } from "react-router-dom";
 import { Navbar } from "../../components/Navbar";
+import { Footer } from "../../components/Footer";
+import { useContext } from "react";
+import { DataContext } from "../../context/DataContext";
+import { PurchaseForm } from "../../components/PurchaseForm";
 
 export const PurchaseSimulation = () => {
-    return (
-      <div>
-        <Navbar />
-        <h2>Simulação de Compra</h2>
-        <p>Obrigado por testar a compra! Aqui você pode simular o processo de pagamento.</p>
+  const { id } = useParams();
+  const { eventos } = useContext(DataContext);
+
+  if (!eventos || eventos.length === 0) {
+    return <div>Carregando eventos...</div>;
+  }
+
+  const evento = eventos.find(evento => evento.id === Number(id));
+
+  if (!evento) {
+    return <div>Evento não encontrado.</div>;
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="purchasePage">
+        <PurchaseForm evento={evento} />
       </div>
-    );
-  };
-  
+      <Footer />
+    </div>
+  );
+};

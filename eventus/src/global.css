@@ -330,6 +330,73 @@ input {
   }
   
 
+  /* PURCHASE FORM */
+
+  .purchaseForm {
+	border: solid var(--accent) 0.25rem;
+	border-radius: 0.3rem;
+	padding: 2rem;
+	max-width: 500px;
+	margin: 2rem auto;
+	background-color: #f9f9f9;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formTitle {
+	text-align: center;
+	margin-bottom: 1.5rem;
+	color: #333;
+  }
+  
+  .form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+  }
+  
+  .formGroup {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  label {
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+	color: #555;
+  }
+  
+  input {
+	padding: 0.5rem;
+	border: 1px solid #ccc;
+	border-radius: 0.3rem;
+	font-size: 1rem;
+	color: #050505;
+	text-align: left;
+  }
+  
+  input:focus {
+	border-color: var(--accent);
+	outline: none;
+	box-shadow: 0 0 4px var(--accent);
+  }
+  
+  .eventButton {
+	background-color: var(--accent);
+	color: whitesmoke;
+	border: none;
+	border-radius: 0.3rem;
+	padding: 0.75rem;
+	font-size: 1rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+  }
+  
+  .eventButton:hover {
+	background-color: darkorange;
+  }
+  
+
 /* PAGES */
 
 /* CONTACT */
@@ -382,9 +449,7 @@ input {
 	width: 80%;
   }
 
-  
-  
-  .search-input {
+.search-input {
 	cursor: pointer;
 	font-size: 20px;
 	text-align: center;
@@ -495,6 +560,28 @@ input {
 	background-color: var(--accent);
 	color: whitesmoke;
   }
+
+  /* NEWS */
+
+  .news-section {
+    background-color: var(--background);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.news-card {
+    background-color: var(--secondary);
+    color: var(--text);
+    padding: 1rem;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+}
+.news-card:hover {
+    transform: scale(1.05);
+    background-color: var(--accent);
+    color: black;
+}
+
   
   
 /* MEDIA QUERIES */

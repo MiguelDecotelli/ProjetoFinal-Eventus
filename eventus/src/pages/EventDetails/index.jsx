@@ -32,7 +32,7 @@ export const EventDetails = () => {
               alt="Card image"
             />
             <div className="d-flex justify-content-center mt-5">
-              <Link className="btn eventButton" to={`/purchaseSimulation`}>
+              <Link className="btn eventButton" to={`/purchaseSimulation/${evento.id}`}>
                 Comprar
               </Link>
             </div>
