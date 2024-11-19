@@ -9,6 +9,7 @@ import { News } from "./pages/news";
 import { NextEvents } from "./pages/nextEvents";
 import { DataProvider } from "./context/DataContext";
 import { EventDetails } from "./pages/EventDetails";
+import { PurchaseSimulation } from "./pages/purchaseSimulation";
 
 function MainRoutes() {
 	return (
@@ -24,6 +25,7 @@ function MainRoutes() {
 						<Route path="/news" element={<News />} />
 						<Route path="/nextEvents" element={<NextEvents />} />
 						<Route path="/eventDetails/:id" element={<EventDetails />} />
+						<Route path="/purchaseSimulation" element={<PurchaseSimulation />} />
 
 						{/* BASE ROTA NÃO ENCONTRADA */}
 						<Route path="*" element={<h1>Página não encontrada (404)</h1>} />

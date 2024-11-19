@@ -13,7 +13,6 @@ export const Contact = () => {
 		<div className="container-contact">
 			<Navbar />
 			<div className="row max-w-2xl mx-auto gap-5 p-5 d-flex flex-column contact-box">
-				<h3 className="text-center">Contato</h3>
 
 				<div className="d-flex flex-wrap justify-content-around gap-3 mb-4 w-100">
 					<div

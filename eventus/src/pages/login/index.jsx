@@ -70,7 +70,7 @@ export const Login = () => {
 		localStorage.setItem("google_token", token);
 		const user = { username: "Usuário Google" };
 		setUser(user);
-		navigate("/contact");
+		navigate("/");
 	};
 
 	// const handleGoogleSuccess = async (response) => {

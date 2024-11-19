@@ -50,7 +50,7 @@ export function Navbar() {
 					</ul>
 					<form className="search-form p-2 justify-content-center" role="search">
 						<input
-							className="form-control search-input"
+							className="form-control search-navBar"
 							type="search"
 							placeholder="O que você procura?"
 							aria-label="Search"
