@@ -7,7 +7,6 @@ export const News = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        // Lista de eventos com ID, imagem, título, descrição e data
         const sampleNews = [
             {
                 id: 1,
@@ -86,46 +85,31 @@ export const News = () => {
     return (
         <div className="container-carousel">
             <Navbar />
-            <main className="d-flex flex-column gap-4">
+            <main className="news-main">
                 <section className="custom-gradient p-4">
-                    <h1 className="text-center" style={{ color: "var(--text)" }}>
-                        News
-                    </h1>
-                    <p className="text-center" style={{ color: "var(--text-placeholder)" }}>
-                        Stay up-to-date with the latest news and events!
-                    </p>
+                    <h1 className="news-title">News</h1>
+                    <p className="news-subtitle">Fique por dentro das Novidades</p>
                 </section>
-                <section className="d-flex flex-column align-items-center gap-3">
+                <section className="news-list">
                     {news.length > 0 ? (
                         news.map((item) => (
                             <Link
                                 to={`/eventDetails/${item.id}`}
                                 key={item.id}
-                                className="custom-card p-3"
-                                style={{
-                                    maxWidth: "800px",
-                                    borderRadius: "8px",
-                                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-                                    textDecoration: "none",
-                                }}
+                                className="custom-card"
                             >
                                 <img
                                     src={item.image}
                                     alt={item.title}
-                                    style={{
-                                        width: "100%",
-                                        height: "200px",
-                                        objectFit: "cover",
-                                        borderRadius: "8px",
-                                    }}
+                                    className="news-image"
                                 />
-                                <h2 style={{ color: "var(--accent)" }}>{item.title}</h2>
-                                <p style={{ color: "var(--text-placeholder)" }}>{item.description}</p>
-                                <small style={{ color: "var(--primary)" }}>Date: {item.date}</small>
+                                <h2 className="news-item-title">{item.title}</h2>
+                                <p className="news-description">{item.description}</p>
+                                <small className="news-date">Date: {item.date}</small>
                             </Link>
                         ))
                     ) : (
-                        <p style={{ color: "var(--text)" }}>Loading news...</p>
+                        <p className="news-loading">Loading news...</p>
                     )}
                 </section>
             </main>
