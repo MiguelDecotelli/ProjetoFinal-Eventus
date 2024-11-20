@@ -11,7 +11,7 @@ export const EventDetails = () => {
   const { id } = useParams();
   const { eventos } = useContext(DataContext);
 
-  const evento = eventos.find(evento => evento.id === Number(id));
+  const evento = eventos.find(evento => evento.id === String(id));
   if (!evento) {
     return <div>Evento não encontrado.</div>;
   }
@@ -23,11 +23,12 @@ export const EventDetails = () => {
         <section className="eventSection">
           <div>
             <h3 className="eventTitle">{evento.title}</h3>
-            <p className="eventDescription">{evento.body}</p>
+            <p className="eventDescription">{evento.description}</p>
+            <p className="eventDescription">{evento.date}</p>
           </div>
           <div>
             <img
-              src={evento.imagem || ImgCard}
+              src={evento.image || ImgCard}
               className="eventImage"
               alt="Card image"
             />

@@ -14,7 +14,7 @@ export const PurchaseSimulation = () => {
     return <div>Carregando eventos...</div>;
   }
 
-  const evento = eventos.find(evento => evento.id === Number(id));
+  const evento = eventos.find(evento => evento.id === String(id));
 
   if (!evento) {
     return <div>Evento não encontrado.</div>;

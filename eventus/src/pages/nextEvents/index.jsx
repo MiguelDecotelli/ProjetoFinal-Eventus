@@ -9,7 +9,6 @@ import { DataContext } from '../../context/DataContext';
 import { Footer } from '../../components/Footer';
 
 
-const url = "https://jsonplaceholder.typicode.com/posts/";
 export const NextEvents = () => {
   const { eventos } = useContext(DataContext);
 

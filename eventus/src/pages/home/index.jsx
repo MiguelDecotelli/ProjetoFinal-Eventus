@@ -25,7 +25,7 @@ export const Home = () => {
 		catchRandomEvents();
 		const eventTimer = setInterval(() => {
 			catchRandomEvents();
-		}, 150000);
+		}, 15000);
 		return () => clearInterval(eventTimer);
 	}, [eventos]);
 	return (
@@ -37,7 +37,18 @@ export const Home = () => {
 				<ImagemHome01 />
 				<TextHome />
 				<ImagemHome02 />
-				<section className="d-flex gap-3 align-items-center justify-content-center">
+				<div className="cardContainer">
+					<section className="d-flex gap-3 align-items-center justify-content-center flex-wrap">
+						{renderedEvents.length > 0 ? (
+							renderedEvents.map((evento, index) => (
+								<CardEvent key={index} evento={evento} />
+							))
+						) : (
+							<p>Carregando eventos...</p>
+						)}
+					</section>
+				</div>
+				{/* <section className="d-flex gap-3 align-items-center justify-content-center flex-wrap">
 					{renderedEvents.length > 0 ? (
 						renderedEvents.map((evento, index) => (
 							<CardEvent key={index} evento={evento} />
@@ -45,16 +56,7 @@ export const Home = () => {
 					) : (
 						<p>Carregando eventos...</p>
 					)}
-				</section>
-				<section className="d-flex gap-3 align-items-center justify-content-center">
-					{renderedEvents.length > 0 ? (
-						renderedEvents.map((evento, index) => (
-							<CardEvent key={index} evento={evento} />
-						))
-					) : (
-						<p>Carregando eventos...</p>
-					)}
-				</section>
+				</section> */}
 				<Footer />
 			</main>
 		</div>

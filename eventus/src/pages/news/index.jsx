@@ -9,7 +9,7 @@ export const News = () => {
     useEffect(() => {
         const sampleNews = [
             {
-                id: 1,
+                id: 101,
                 title: "Estreia: 'Avatar 3'",
                 description: "Confira a tão aguardada continuação da saga Avatar nos cinemas.",
                 date: "2024-12-18",

@@ -14,13 +14,13 @@ export function Footer() {
       </a>
       <br />
       <div className="footerSocials">
-        <a href="https://www.instagram.com">
+        <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
           <i className="fa-brands fa-instagram"></i>
         </a>
-        <a href="https://twitter.com/">
+        <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer">
           <i className="fa-brands fa-square-x-twitter"></i>
         </a>
-        <a href="https://www.linkedin.com">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
         <i className="fa-brands fa-linkedin"></i>
         </a>
       </div>

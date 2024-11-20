@@ -234,6 +234,12 @@ input {
 }
 
 /* CARDEVENTS */
+.cardContainer {
+	display: flex;
+	justify-content: center;
+	padding: 2rem 0;
+	/* width: 90%;  */
+  }
 
 .card {
 	display: flex;
@@ -243,7 +249,7 @@ input {
 	border: black solid .125rem;
 	border-radius: .825rem;
 	width: 21rem;
-	gap: 1rem
+	gap: 1rem;
 }
 
 .card-img-custom {
@@ -298,8 +304,6 @@ input {
 /* TEXTITLE / TEXTHOME*/
 
 .TextContainer {
-	/* border-color:orangered; */
-	/* border: solid orangered .2rem; */
 	background-color: whitesmoke;
 	padding: 2rem 0;
 	width: 100%; 
@@ -607,6 +611,7 @@ input {
 }
 
 .news-list {
+	/* width: 100rem; */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -614,7 +619,8 @@ input {
 }
 
 .custom-card {
-    max-width: 800px;
+	/* min-height: 600px; */
+    min-width: 800px;
     padding: 1.5rem;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -660,7 +666,12 @@ input {
 @media (max-width: 479.98px) {}
 
 /* Extra Small (xs) - dispositivos menores que 576px */
-@media (max-width: 575.98px) {}
+@media (max-width: 575.98px) {
+	.card {
+		height: 2rem;
+		width: 3rem;
+	}
+}
 
 /* Small (sm) - dispositivos a partir de 576px */
 @media (min-width: 576px) {}
