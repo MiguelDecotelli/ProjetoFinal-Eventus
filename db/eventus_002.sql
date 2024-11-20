@@ -93,8 +93,14 @@ CREATE TABLE IF NOT EXISTS `eventus`.`Tickets` (
   `value` FLOAT NULL,
   `description` TEXT(2550) NULL,
   `amount` INT NULL,
+  `events_id` INT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
+  CONSTRAINT `fk_Events_id1`
+      FOREIGN KEY (`events_id`)
+      REFERENCES `eventus`.`events` (`id`)
+      ON DELETE NO ACTION
+      ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
