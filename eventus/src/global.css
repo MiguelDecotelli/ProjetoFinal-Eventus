@@ -5,6 +5,7 @@
 	--primary: #d2a7b1;
 	--secondary: #7a2936;
 	--accent: #c36950;
+	--background-card: #2e2e2e;
 }
 
 /*  RESET */
@@ -205,22 +206,28 @@ input {
 .card{
 	width: 300px;
 	height: 450px;
-	background-color: #2e2e2e;
-  color: #f1e4e6;
+	background-color: var(--background-card);
+  color: var(--text);
 }
 
 .card::-webkit-scrollbar {
   padding: 20px;
   width: 12px;
-  background-color: #2e2e2e;
-  border: 5px solid #2e2e2e;
+  background-color: var(--background-card);
+  border: 5px solid var(--background-card);
   border-radius: 50px;
 }
 
 .card::-webkit-scrollbar-thumb{
-  background-color: #c36950;
+  background-color: var(--accent);
   border-radius: 50px;
-  border: 2px solid #2e2e2e;
+  border: 2px solid var(--background-card);
+}
+
+.footer{
+	margin-top: 20px;
+	font-size: 20px;
+	color: var(--accent);
 }
 
 

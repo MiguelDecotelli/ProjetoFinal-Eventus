@@ -4,41 +4,20 @@ import { Navbar } from '../../components/Navbar';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { FaChevronLeft, FaChevronRight  } from "react-icons/fa6";
 
-const url = "https://jsonplaceholder.typicode.com/posts/";
+import { useContext } from 'react';
+import { DataContext } from '../../context/DataContext';
 
 export const NextEvents = () => {
   //States do Projeto
-  const [eventos, setEventos] = useState([]); // Estado para armazenar os eventos
+  const { eventos } = useContext(DataContext);
 
   // Search Event
   const [search, setSearch] = useState(''); // Estado para a busca
-  const [displayedEvents, setDisplayedEvents] = useState([]); // Lista de eventos filtrados
-  const [loading, setLoading] = useState(true); // Estado de carregamento
+  const [displayedEvents, setDisplayedEvents] = useState(eventos); // Lista de eventos filtrados
 
   // Estados de paginação
   const [currentPage, setCurrentPage] = useState(1); // Página atual
   const [itemsPerPage] = useState(6); // Quantidade de itens por página
-  
-// #######################################################################################
-  
-  // Fazer a requisição para a API quando o componente for montado
-  useEffect(() => {
-    const fetchEventos = async () => {
-      try {
-        const response = await fetch(url);
-        const data = await response.json(); // Converte a resposta em JSON
-        setEventos(data); // Atualiza o estado com os dados da API
-        setDisplayedEvents(data); // Inicializa a lista filtrada com todos os eventos
-      } catch (error) {
-        console.error("Erro ao buscar eventos: ", error);
-      } finally {
-        setLoading(false); // Marca como carregado
-      }
-    };  
-    fetchEventos(); // Chama a função de requisição
-  }, []);
-  
-  // #######################################################################################
 
   // Efeito para filtrar os eventos sempre que o valor de search mudar
   useEffect(() => {
@@ -80,9 +59,6 @@ export const NextEvents = () => {
   // Página atual dos eventos
   const currentEvents = paginate(displayedEvents, currentPage);
 
-  if (loading) {
-    return <p>Carregando os Eventos...</p>; // Mostra a mensagem de carregamento enquanto os dados não chegam
-  }
 
   return (
     <div className='container-events'>

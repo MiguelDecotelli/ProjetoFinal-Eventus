@@ -1,6 +1,7 @@
 package com.eventus.eventus.security;
 
 import com.eventus.eventus.model.UserModel;
+import com.eventus.eventus.model.UserRole;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,9 @@ public class JwtTokenProvider {
   public String extractUsername(String token){
     return extractClaim(token, Claims::getSubject);
   }
+  public String extractId(String token){
+    return extractClaim(token, Claims::getId);
+  }
   public <T>T extractClaim(String token, Function<Claims, T> claimsResolver){
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
@@ -35,7 +39,7 @@ public class JwtTokenProvider {
     return createToken(claims, user);
   }
   private String createToken(Map<String, Object> claims, UserModel user){
-    var role = user.getRole();
+    UserRole role = user.getRole();
     return Jwts.builder()
             .setClaims(claims)
             .setSubject(user.getUsername())

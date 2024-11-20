@@ -1,15 +1,15 @@
 package com.eventus.eventus.service;
 
+import com.eventus.eventus.dto.CityDTO;
 import com.eventus.eventus.dto.UserDTO;
+import com.eventus.eventus.model.CityModel;
 import com.eventus.eventus.model.UserModel;
 import com.eventus.eventus.model.UserRole;
 import com.eventus.eventus.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -36,15 +36,16 @@ public class UserService {
         }
     }
     public ResponseEntity<UserDTO> createUser(UserDTO userDTO){
+        UserModel userModel = new UserModel();
+        userModel.setUsername(userDTO.getUsername());
+        userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
+        userModel.setName(userDTO.getName());
+        userModel.setEmail(userDTO.getEmail());
+        userModel.setBirthday(userDTO.getBirthday());
+        userModel.setLastname(userDTO.getLastname());
+        userModel.setRole(UserRole.valueOf(userDTO.getRole()));
         try {
-            UserModel userModel = new UserModel();
-            userModel.setUsername(userDTO.getUsername());
-            userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
-            userModel.setName(userDTO.getName());
-            userModel.setEmail(userDTO.getEmail());
-            userModel.setBirthday(userDTO.getBirthday());
-            userModel.setLastname(userDTO.getLastname());
-            repository.save(userModel);
+            userModel = repository.save(userModel);
             return ResponseEntity.ok(convertToDTO(userModel));
         } catch(DataAccessException e){
             System.out.println(e);
@@ -52,18 +53,19 @@ public class UserService {
         }
     }
     public ResponseEntity<UserDTO> updateUser(int id, UserDTO userDTO){
+        Optional<UserModel> userOption = repository.findById(id);
+        if (userOption.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
         try {
-            Optional<UserModel> userOption = repository.findById(id);
-            if (userOption.isEmpty()) {
-                return ResponseEntity.notFound().build();
-            }
-            UserModel userModel = new UserModel();
+            UserModel userModel = userOption.get();
             userModel.setUsername(userDTO.getUsername());
             userModel.setPassword(new BCryptPasswordEncoder().encode(userDTO.getPassword()));
             userModel.setName(userDTO.getName());
             userModel.setEmail(userDTO.getEmail());
             userModel.setBirthday(userDTO.getBirthday());
             userModel.setLastname(userDTO.getLastname());
+            userModel.setRole(UserRole.valueOf(userDTO.getRole()));
             repository.save(userModel);
             return ResponseEntity.ok(convertToDTO(userModel));
         } catch (DataAccessException e){
@@ -84,13 +86,21 @@ public class UserService {
             return ResponseEntity.internalServerError().build();
         }
     }
-    private UserDTO convertToDTO(UserModel userModel){
-        UserDTO userDTO = new UserDTO();
-        userDTO.setId(userModel.getId());
-        userDTO.setName(userModel.getName());
-        userDTO.setUsername(userModel.getUsername());
-        userDTO.setLastname(userModel.getLastname());
-        userDTO.setEmail(userModel.getEmail());
-        return userDTO;
+    private UserDTO convertToDTO(UserModel model){
+			CityDTO city = model.getCity() != null ? convertCityModelToCityDTO(model.getCity()) : null;
+        return new UserDTO(
+					model.getId(),
+					model.getUsername(),
+					"",
+					model.getEmail(),
+					model.getName(),
+					model.getLastname(),
+					model.getBirthday(),
+					model.getRole().getRole(),
+					city
+				);
     }
+	private CityDTO convertCityModelToCityDTO(CityModel model){
+		return new CityDTO(model.getName(), model.getState());
+	}
 }
