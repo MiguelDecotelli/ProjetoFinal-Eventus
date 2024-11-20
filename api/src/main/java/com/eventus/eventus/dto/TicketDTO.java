@@ -1,6 +1,6 @@
 package com.eventus.eventus.dto;
 
-public record TicketDTO(int id,String name,String description,int amount, int event){
+public record TicketDTO(int id,String name,String description,int amount,  float value, int event){
 	public int getId() {
 		return id;
 	}
@@ -16,4 +16,8 @@ public record TicketDTO(int id,String name,String description,int amount, int ev
 	public int getEvent() {
 		return event;
 	}
+	public float getValue() {
+		return value;
+	}
+
 }

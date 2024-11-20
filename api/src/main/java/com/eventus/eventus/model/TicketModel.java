@@ -22,23 +22,27 @@ public class TicketModel {
 	private String description;
 	@Column(name = "amount")
 	private int amount;
+	@Column(name = "value")
+	private float value;
 	@ManyToOne
 	@JoinColumn(name="Events_id")
 	private EventsModel event;
 	// Constructors
 	public TicketModel(){}
-	public TicketModel(String name, String description, int amount, EventsModel event){
+	public TicketModel(String name, String description, int amount, EventsModel event, float value){
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
 		this.event = event;
+		this.value = value;
 	}
-	public TicketModel(int id, String name, String description, int amount, EventsModel event){
+	public TicketModel(int id, String name, String description, int amount, EventsModel event, float value){
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.amount = amount;
 		this.event = event;
+		this.value = value;
 	}
 
 	// Getters and Setters
@@ -72,4 +76,11 @@ public class TicketModel {
 	public EventsModel getEvent() {
 		return event;
 	}
+	public float getValue() {
+		return value;
+	}
+	public void setValue(float value) {
+		this.value = value;
+	}
+
 }

@@ -162,6 +162,7 @@ public class UsersTicketsService {
 				model.getName(),
 				model.getDescription(),
 				model.getAmount(),
+				model.getValue(),
 				model.getEvent().getId()
 			);
 	}
