@@ -25,13 +25,13 @@ public class CityController {
 	@Autowired
 	private CityService service;
 
-	@Operation(summary = "", description = "")
+	@Operation(summary = "Retorna uma lista contendo todas as cidades", description = "Busca no banco de dados todas as cidade cadastradas e retorna elas em uma lista")
 	@GetMapping
 	public ResponseEntity<List<CityModel>> getAllCities() {
 		return service.readAllCities();
 	}
 
-	@Operation(summary = "Retorna uma lista com todas as cidades cadastradas no banco de dados", description = "Busca no banco de dados todas as cidade cadastradas e retorna elas em uma lista")
+	@Operation(summary = "Retorna cidade cadastradas no banco de dados", description = "Busca no banco de dados a cidade do qual o ID pertence e retorna ela caso existir")
 	@GetMapping("/{id}")
 	public ResponseEntity<CityModel> getCityById(@PathVariable int id) {
 		return service.readCityById(id);
