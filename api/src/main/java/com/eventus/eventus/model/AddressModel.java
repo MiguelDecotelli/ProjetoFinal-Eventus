@@ -19,7 +19,7 @@ public class AddressModel {
 	private String complement;
 	@Column(name = "description")
 	private String description;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "Cities_id")
 	private CityModel city;
 

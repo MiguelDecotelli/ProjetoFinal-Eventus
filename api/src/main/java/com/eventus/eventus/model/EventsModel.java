@@ -3,6 +3,7 @@ package com.eventus.eventus.model;
 import java.util.Set;
 import java.util.Date;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,11 +41,11 @@ public class EventsModel {
 	@Column(name = "status")
 	private EventsStatus eventStatus;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "Address_id")
 	private AddressModel eventAddress;
 
-	@OneToMany(fetch = FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "Users_id")
 	private Set<UserModel> admins;
 

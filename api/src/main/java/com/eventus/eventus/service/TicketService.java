@@ -20,12 +20,14 @@ public class TicketService {
 	private TicketRepository repository;
 	@Autowired
 	private EventsRepository eventsRepository;
+
 	public ResponseEntity<TicketModel> createTicket(TicketDTO data) {
 		TicketModel model = new TicketModel();
 		model.setName(data.getName());
 		model.setDescription(data.getDescription());
 		model.setAmount(data.getAmount());
-		model.setEvent(eventsRepository.findById(data.getEvent().getId()).get());
+		EventsModel event= eventsRepository.findById(data.getEvent()).get();
+		model.setEvent(event);
 		try {
 			TicketModel ticket = repository.save(model);
 			return ResponseEntity.ok(ticket);
@@ -84,19 +86,7 @@ public class TicketService {
 		model.getName(),
 		model.getDescription(),
 		model.getAmount(),
-		convertEventsModelToEventsDTO(model.getEvent())
+		model.getEvent().getId()
 		);
-	}
-	private EventsDTO convertEventsModelToEventsDTO(EventsModel model){
-		return new EventsDTO(
-				model.getId(),
-				model.getName(),
-				model.getInitialDate(),
-				model.getFinalDate(),
-				model.getDescription(),
-				model.getEventImage(),
-				model.getEventStatus(),
-				model.getEventAddress()
-			);
 	}
 }

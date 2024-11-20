@@ -1,5 +1,6 @@
 package com.eventus.eventus.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,10 +18,10 @@ public class UsersTicketsModel {
 	@Column(name="UsersTickets_id", nullable = false, unique = true)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "Users_id", unique = false, nullable = false)
 	private UserModel user;
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
 	@JoinColumn(name = "Tickets_id", unique = false, nullable = false)
 	private TicketModel ticket;
 	@Column(name = "ticket_status", unique = false, nullable = false)
