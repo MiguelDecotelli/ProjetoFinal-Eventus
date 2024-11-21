@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.eventus.eventus.dto.EventsDTO;
 import com.eventus.eventus.dto.TicketDTO;
 import com.eventus.eventus.model.EventsModel;
 import com.eventus.eventus.model.TicketModel;
@@ -26,6 +25,7 @@ public class TicketService {
 		model.setName(data.getName());
 		model.setDescription(data.getDescription());
 		model.setAmount(data.getAmount());
+		model.setValue(data.getValue());
 		EventsModel event= eventsRepository.findById(data.getEvent()).get();
 		model.setEvent(event);
 		try {
@@ -86,6 +86,7 @@ public class TicketService {
 		model.getName(),
 		model.getDescription(),
 		model.getAmount(),
+		model.getValue(),
 		model.getEvent().getId()
 		);
 	}
