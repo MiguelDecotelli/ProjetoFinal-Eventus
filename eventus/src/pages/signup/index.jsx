@@ -7,6 +7,10 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 import { Input } from "../../components/Input";
 import { makeRequest } from "../../utils/makeRequest";
+// import backgroundImg from "/src/img/bkg.jpg";
+
+
+
 
 const schema = yup.object().shape({
 	username: yup.string().required("O usuário é obrigatório."),
