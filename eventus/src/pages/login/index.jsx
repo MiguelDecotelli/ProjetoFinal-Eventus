@@ -7,6 +7,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../../components/Input";
 import { makeRequest } from "../../utils/makeRequest";
 import { useUser } from "../../context/UserContext";
+import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+// import backgroundImg from "/src/img/loginSignup.jpg";
+
 
 const schema = yup.object().shape({
 	username: yup.string().required("O usuario é obrigatório."),
@@ -55,31 +58,45 @@ export const Login = () => {
 		navigate("/");
 	}
 
+	const handleGoogleSuccess = (response) => {
+		alert("Login Google bem-sucedido:", response);
+		const token = response.credential;
+		localStorage.setItem("google_token", token);
+		const user = { username: "Usuário Google" };
+		setUser(user);
+		navigate("/");
+	};
+
+	const handleGoogleError = () => {
+		console.error("Erro ao fazer login com o Google.");
+	};
+
 	return (
-		<main className="d-flex align-items-center justify-content-center vh-100 custom-gradient">
-			<section className="bg text m-auto custom-section row g-0 position-relative">
-				<div className="col position-relative w-100 h-100 custom-background-login">
-					<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay d-flex flex-row">
-						<NavLink to="/" className="p-2 z-2">
-							<i className="fa-solid fa-xmark"></i>
-						</NavLink>
+		<GoogleOAuthProvider clientId="1099112821910-bgpa0st364t55acm9r25btgtavk5mf15.apps.googleusercontent.com">
+			<main className="d-flex align-items-center justify-content-center vh-100 custom-gradient">
+				<section className="bg text m-auto custom-section row g-0 position-relative">
+					<div className="col position-relative w-100 h-100 custom-background-login">
+						<div className="position-absolute top-0 start-0 end-0 bottom-0 overlay d-flex flex-row">
+							<NavLink to="/" className="p-2 z-2">
+								<i className="fa-solid fa-xmark"></i>
+							</NavLink>
+						</div>
 					</div>
-				</div>
 
-				<div className="col">
-					<div className="d-flex gap-4 flex-column justify-content-center h-100 p-3 position-relative">
-						<Link
-							to="/signup"
-							className="position-absolute top-0 d-flex justify-content-evenly p-3 z-2 custom-style-left"
-						>
-							<i className="fa-solid fa-angles-left"></i>Cadastrar
-						</Link>
+					<div className="col">
+						<div className="d-flex gap-4 flex-column justify-content-center h-100 p-3 position-relative">
+							<Link
+								to="/signup"
+								className="position-absolute top-0 d-flex justify-content-evenly p-3 z-2 custom-style-left"
+							>
+								<i className="fa-solid fa-angles-left"></i>Cadastrar
+							</Link>
 
-						<form
-							className="p-4 d-flex flex-column gap-2"
-							onSubmit={handleSubmit(handleLogin)}
-						>
-							<h3>Conecte-se</h3>
+							<form
+								className="p-4 d-flex flex-column gap-2"
+								onSubmit={handleSubmit(handleLogin)}
+							>
+								<h3>Conecte-se</h3>
 
 							<Input
 								label="USERNAME"
@@ -98,45 +115,46 @@ export const Login = () => {
 								error={errors.password?.message}
 							/>
 
-							<div className="d-flex justify-content-between">
-								<div className="form-check">
-									<input
-										className="form-check-input"
-										type="checkbox"
-										id="remember"
-									/>
-									<label className="form-check-label small" htmlFor="remember">
-										Lembrar de mim.
-									</label>
+								<div className="d-flex justify-content-between">
+									<div className="form-check">
+										<input
+											className="form-check-input"
+											type="checkbox"
+											id="remember"
+										/>
+										<label className="form-check-label small" htmlFor="remember">
+											Lembrar de mim.
+										</label>
+									</div>
+
+									<Link to="#" className="link-secondary small">
+										Esqueceu a senha?
+									</Link>
 								</div>
 
-								<Link to="#" className="link-secondary small">
-									Esqueceu a senha?
-								</Link>
+								<button
+									className="btn mx-4 btn-outline-light mt-4"
+									type="submit"
+									disabled={loading}
+								>
+									{loading ? "Carregando..." : "Entrar"}
+								</button>
+							</form>
+
+							<div className="d-grid text-center col-6 mx-auto">
+								<p>OU</p>
+								<GoogleLogin
+									onSuccess={handleGoogleSuccess}
+									onError={handleGoogleError}
+									theme="outline"
+									size="large"
+									shape="circle"
+								/>
 							</div>
-
-							<button
-								className="btn mx-4 btn-outline-light mt-4"
-								type="submit"
-								disabled={loading}
-							>
-								{loading ? "Carregando..." : "Entrar"}
-							</button>
-						</form>
-
-						<div className="d-grid text-center gap-1 col-6 mx-auto">
-							<p>OU</p>
-							<button
-								className="btn btn-light rounded-pill border d-flex gap-2 align-items-center justify-content-center"
-								type="button"
-							>
-								<i className="fa-brands fa-google"></i>
-								Entrar com o Google
-							</button>
 						</div>
 					</div>
-				</div>
-			</section>
-		</main>
+				</section>
+			</main>
+		</GoogleOAuthProvider>
 	);
 };
