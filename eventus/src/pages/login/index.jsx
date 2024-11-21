@@ -9,26 +9,21 @@ import { makeRequest } from "../../utils/makeRequest";
 import { useUser } from "../../context/UserContext";
 
 const schema = yup.object().shape({
-	email: yup
-		.string()
-		.email("Email inválido")
-		.required("O email é obrigatório."),
+	username: yup.string().required("O usuario é obrigatório."),
 	password: yup.string().required("A senha é obrigatória."),
 });
 
 const validateUser = async (data, setError) => {
-	const users = await makeRequest("/users", "GET");
-	const user = users.find((user) => user.email === data.email);
-
-	if (!user) {
-		setError("email", { type: "manual", message: "Email não encontrado" });
+	console.log(data);
+	const reqData = {username: data.username, password: data.password};
+	const response = await makeRequest("http://localhost:8080/api/auth/login", "POST", reqData);
+	if(response === null){ 
+		setError("password", {type: "manual", message: "Login invalido"})
 		return false;
 	}
-
-	if (user.password !== data.password) {
-		setError("password", { type: "manual", message: "Senha incorreta" });
-		return false;
-	}
+	const token = response.token;
+	const user = response.user;
+	localStorage.setItem("token", token)
 
 	return user.username;
 };
@@ -56,9 +51,6 @@ export const Login = () => {
 			setLoading(false);
 			return;
 		}
-
-		const token = btoa(`${data.email}:${new Date().getTime()}`);
-		localStorage.setItem("token", token);
 		setUser(user);
 		navigate("/");
 	}
@@ -90,12 +82,12 @@ export const Login = () => {
 							<h3>Conecte-se</h3>
 
 							<Input
-								label="EMAIL"
-								id="inputEmail"
-								type="email"
-								placeholder="exemplo@email.com"
-								{...register("email")}
-								error={errors.email?.message}
+								label="USERNAME"
+								id="inputUsername"
+								type="text"
+								placeholder="usuario"
+								{...register("username")}
+								error={errors.username?.message}
 							/>
 							<Input
 								label="SENHA"
