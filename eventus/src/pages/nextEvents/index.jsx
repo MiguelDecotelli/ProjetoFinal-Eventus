@@ -7,26 +7,29 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 import { useContext } from 'react';
 import { DataContext } from '../../context/DataContext';
 import { Footer } from '../../components/Footer';
-
-
 export const NextEvents = () => {
   const { eventos } = useContext(DataContext);
 
-  const [search, setSearch] = useState('');
-  const [displayedEvents, setDisplayedEvents] = useState(eventos);
+  // Função para filtrar eventos futuros
+  const eventosFuturos = eventos.filter((evento) => {
+    const eventDate = new Date(evento.date);
+    const today = new Date();
+    return eventDate > today;
+  });
 
+  const [search, setSearch] = useState('');
+  const [displayedEvents, setDisplayedEvents] = useState(eventosFuturos); // Usa eventosFuturos aqui
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6);
 
   useEffect(() => {
-    const filteredEvents = eventos.filter((evento) =>
+    const filteredEvents = eventosFuturos.filter((evento) =>
       evento.title.toLowerCase().includes(search.toLowerCase()) ||
       evento.id.toString().includes(search)
     );
     setDisplayedEvents(filteredEvents);
-  }, [search, eventos]);
-
+  }, [search, eventosFuturos]);
 
   const paginate = (events, pageNumber) => {
     const startIndexPage = (pageNumber - 1) * itemsPerPage;
@@ -41,15 +44,12 @@ export const NextEvents = () => {
     return result;
   };
 
-
-
   const onDragEnd = (result) => {
     if (!result.destination) return;
 
     const reordered = reorder(displayedEvents, result.source.index, result.destination.index);
     setDisplayedEvents(reordered);
   };
-
 
   const totalPages = Math.ceil(displayedEvents.length / itemsPerPage);
 
@@ -59,7 +59,7 @@ export const NextEvents = () => {
     <div>
       <div className="nextEvents">
         <Navbar />
-        <h1 className=" mt-4 mb-4">Todos os Eventos da Cidade</h1>
+        <h1 className="nextEvents-Title">Próximos Eventos</h1>
         <div className="search">
           <label className="search-label">
             <input
@@ -72,7 +72,7 @@ export const NextEvents = () => {
           </label>
         </div>
 
-        {eventos.length > 0 && (
+        {eventosFuturos.length > 0 && ( // Usa eventosFuturos aqui também
           <section>
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="eventos" type="list" direction="horizontal">

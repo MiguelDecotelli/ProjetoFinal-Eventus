@@ -75,11 +75,11 @@ export const Login = () => {
 
 	// const handleGoogleSuccess = async (response) => {
 	// 	const token = response.credential;
-	  
+
 	// 	try {
 	// 	  const res = await makeRequest("/auth/google", "POST", { token });
 	// 	  const { username } = res.data;
-	  
+
 	// 	  localStorage.setItem("google_token", token);
 	// 	  setUser({ username });
 	// 	  navigate("/");
