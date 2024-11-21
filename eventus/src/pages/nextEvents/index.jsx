@@ -59,7 +59,7 @@ export const NextEvents = () => {
     <div>
       <div className="nextEvents">
         <Navbar />
-        <h1 className="nextEvents-Title">Próximos Eventos</h1>
+        <h1 className="nextEvents-Title">Buscar Eventos</h1>
         <div className="search">
           <label className="search-label">
             <input
