@@ -3,6 +3,7 @@ package com.eventus.eventus.controller;
 import com.eventus.eventus.dto.AuthenticationDTO;
 import com.eventus.eventus.dto.RegistrationDTO;
 import com.eventus.eventus.dto.UserDTO;
+import com.eventus.eventus.dto.UserLogedDTO;
 import com.eventus.eventus.service.AuthenticationService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +23,7 @@ public class AuthenticationController {
 
 	@Operation(summary = "Retorna o token JWT se os dados do usuario estiverem corretos", description = "")
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@RequestBody AuthenticationDTO data) {
+	public ResponseEntity<UserLogedDTO> login(@RequestBody AuthenticationDTO data) {
 		return service.login(data);
 	}
 

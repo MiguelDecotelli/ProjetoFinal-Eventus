@@ -26,6 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.eventus.eventus.controller.TicketController;
 import com.eventus.eventus.dto.TicketDTO;
+import com.eventus.eventus.model.EventsModel;
 import com.eventus.eventus.model.TicketModel;
 import com.eventus.eventus.service.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,7 +55,7 @@ public class TicketControllerTests {
 	@Test
 	@WithMockUser(roles="ADMIN")
 	public void testGetAllTicket() throws Exception {
-		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, null);
+		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, 30f, 0);
 		when(service.readAllTickets()).thenReturn(ResponseEntity.ok(List.of(dto)));
 		mockMvc.perform(get("/api/tickets"))
 				.andExpect(status().isOk())
@@ -65,7 +66,7 @@ public class TicketControllerTests {
 	@Test
 	@WithMockUser(roles="ADMIN")
 	public void testTicketById() throws Exception {
-		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, null);
+		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, 30f, 0);
 		when(service.readTicketById(1)).thenReturn(ResponseEntity.ok(dto));
 		mockMvc.perform(get("/api/tickets/1"))
 				.andExpect(status().isOk())
@@ -76,8 +77,8 @@ public class TicketControllerTests {
 	@Test
 	@WithMockUser(roles="ADMIN")
 	public void testCreateTicket() throws Exception {
-		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, null);
-		TicketModel model = new TicketModel(1, "Testes VIP", "Melhor ingresso dos testes", 10, null);
+		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, 30f,0);
+		TicketModel model = new TicketModel(1, "Testes VIP", "Melhor ingresso dos testes", 10,null,30f);
 		when(service.createTicket(dto)).thenReturn(ResponseEntity.ok(model));
 		mockMvc
 				.perform(
@@ -100,7 +101,7 @@ public class TicketControllerTests {
 	@Test
 	@WithMockUser(roles="ADMIN")
 	public void testUpdateTicket() throws Exception {
-		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, null);
+		TicketDTO dto = new TicketDTO(1, "Testes VIP", "Melhor ingresso dos testes", 10, 30f, 0);
 		when(service.updateTicket(1, dto)).thenReturn(ResponseEntity.ok(dto));
 		mockMvc.perform(
 				put("/api/tickets/1")

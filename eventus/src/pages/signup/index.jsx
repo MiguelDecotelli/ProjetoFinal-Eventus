@@ -42,7 +42,7 @@ export const SignUp = () => {
 		const { confirmPassword, ...signupData } = data;
 
 		try {
-			await makeRequest("/users", "POST", signupData);
+			await makeRequest("http://localhost:8080/api/auth/register", "POST", signupData);
 			alert("Usuário cadastrado com sucesso!");
 			navigate("/login");
 		} catch (error) {

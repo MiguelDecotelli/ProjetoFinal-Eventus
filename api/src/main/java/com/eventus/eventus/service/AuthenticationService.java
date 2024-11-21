@@ -4,6 +4,7 @@ import com.eventus.eventus.dto.AuthenticationDTO;
 import com.eventus.eventus.dto.CityDTO;
 import com.eventus.eventus.dto.RegistrationDTO;
 import com.eventus.eventus.dto.UserDTO;
+import com.eventus.eventus.dto.UserLogedDTO;
 import com.eventus.eventus.model.CityModel;
 import com.eventus.eventus.model.UserModel;
 import com.eventus.eventus.model.UserRole;
@@ -30,14 +31,15 @@ public class AuthenticationService {
   @Autowired
   private JwtTokenProvider jwtTokenProvider;
 
-  public ResponseEntity<String> login(AuthenticationDTO data){
+  public ResponseEntity<UserLogedDTO> login(AuthenticationDTO data){
     try{
       Authentication authentication = authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(data.getUsername(), data.getPassword())
       );
       UserDetails authenticatedUser = (UserDetails) authentication.getPrincipal();
       UserModel user = repository.findByUsernameAndPassword(authenticatedUser.getUsername(), authenticatedUser.getPassword());
-      return ResponseEntity.ok(jwtTokenProvider.generateToken(user));
+			UserLogedDTO dto = new UserLogedDTO(jwtTokenProvider.generateToken(user), user);
+      return ResponseEntity.ok(dto);
     }catch(AuthenticationException e){
       return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
