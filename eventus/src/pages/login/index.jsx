@@ -25,7 +25,7 @@ const validateUser = async (data, setError) => {
 	const user = response.user;
 	localStorage.setItem("token", token)
 
-	return user.username;
+	return user;
 };
 
 export const Login = () => {

@@ -67,7 +67,7 @@ export function Navbar() {
 					</form>
 					{user ? (
 						<div className="p-2 d-flex justify-content-center align-items-center gap-2">
-							<span>Olá, {user}!</span>
+							<span>Olá, {user.username}!</span>
 
 							<button type="button" onClick={logout} className="btn btn-light">
 								Sair

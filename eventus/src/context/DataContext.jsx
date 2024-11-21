@@ -3,6 +3,15 @@ import { makeRequest } from "../utils/makeRequest.js";
 
 export const DataContext = createContext();
 
+const convertEvents = (data)=>{
+	return{
+		id: data.id,
+		title: data.name,
+		body: data.description,
+		image: data.eventImage
+	}
+}
+
 export const DataProvider = ({ children }) => {
 	const [eventos, setEventos] = useState([]);
 
@@ -13,8 +22,7 @@ export const DataProvider = ({ children }) => {
 		try {
 			const response = await fetch(url);
 			const data = await response.json();
-			console.log(data);
-			setEventos(data);
+			setEventos(data.map(convertEvents));
 		} catch (error) {
 			console.error("Erro ao buscar eventos:", error);
 		}
