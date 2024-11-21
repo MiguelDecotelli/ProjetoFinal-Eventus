@@ -8,7 +8,6 @@ export const CardEvent = ({ evento }) => {
       <div className="card-body d-flex flex-column">
         <h4 className="card-title">{evento.title}</h4>
         <p className="card-text">{evento.description}</p>
-        <p className="card-text">{evento.date}</p>
         <div className="mt-auto d-flex justify-content-center">
           <Link className="btn btn-orange mx-auto" to={`/eventDetails/${evento.id}`}>
             Detalhes

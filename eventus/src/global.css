@@ -124,7 +124,7 @@ input {
 
 .custom-background-login,
 .custom-background-signup {
-	background: url("./src/img/bkg.jpg") no-repeat;
+	background: url("src/img/loginSignup.jpg") no-repeat;
 	background-size: cover;
 }
 
@@ -262,8 +262,9 @@ input {
 
 .card-title {
 	color: var(--accent);
-	margin-bottom: 0.75rem;
-	text-align: justify;
+	margin-bottom: 0.85rem;
+	text-align: center;
+	font-size:x-large;
 }
 
 .card-text {
@@ -483,11 +484,10 @@ input:focus {
 .nextEvents .search:hover h1 {
 	color: var(--accent);
 }
-
 .list-cards {
 	border: solid var(--accent) .25rem;
-}
-
+  }
+  
 .pagination button {
 	margin: 20px 12px;
 	padding: 5px 15px;
@@ -533,7 +533,7 @@ input:focus {
 
 .eventTitle {
 	/* margin-top: 1rem; */
-	text-align: justify;
+	text-align: center;
 	color: whitesmoke;
 	margin-bottom: 4rem;
 	font-size: 1.5rem;
@@ -769,4 +769,10 @@ input:focus {
 @media (min-width: 1200px) {}
 
 /* Extra Extra Large (xxl) - dispositivos a partir de 1400px  */
-@media (min-width: 1400px) {}
+@media (min-width: 1400px) {
+	.list-cards > li {
+		flex: 1 1 calc(24% - 1rem);
+		max-width: calc(24% - 1rem);
+	  }
+	
+}

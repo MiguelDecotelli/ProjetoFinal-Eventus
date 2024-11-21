@@ -1,11 +1,11 @@
-import logoImage from "../img/logoEventus.png"
+// import logoImage from "../img/logoEventus.png"
 
 export function Footer() {
   return (
     <footer className="footerPages">
       <a href="/" target="_blank" rel="noopener noreferrer">
         <img className="footerImage"
-          src={logoImage}
+          src="/logoEventus.png"
           alt="Eventus" />
       </a>
       <br />

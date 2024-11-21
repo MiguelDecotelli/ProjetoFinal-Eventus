@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import ImgLogo from "../img/logo-w.png";
+// import ImgLogo from "../img/logo-w.png";
 import { useUser } from "../context/UserContext";
 
 export function Navbar() {
@@ -9,7 +9,7 @@ export function Navbar() {
 		<nav className="navbar navbar-expand-lg bg container">
 			<div className="container-fluid py-2">
 				<NavLink className="navbar-brand" to="/">
-					<img src={ImgLogo} width={40} />
+					<img src="/logo-w.png" width={40} />
 				</NavLink>
 				<button
 					className="navbar-toggler"

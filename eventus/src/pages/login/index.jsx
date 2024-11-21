@@ -8,6 +8,8 @@ import { Input } from "../../components/Input";
 import { makeRequest } from "../../utils/makeRequest";
 import { useUser } from "../../context/UserContext";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+// import backgroundImg from "/src/img/loginSignup.jpg";
+
 
 const schema = yup.object().shape({
 	email: yup
@@ -72,23 +74,6 @@ export const Login = () => {
 		setUser(user);
 		navigate("/");
 	};
-
-	// const handleGoogleSuccess = async (response) => {
-	// 	const token = response.credential;
-
-	// 	try {
-	// 	  const res = await makeRequest("/auth/google", "POST", { token });
-	// 	  const { username } = res.data;
-
-	// 	  localStorage.setItem("google_token", token);
-	// 	  setUser({ username });
-	// 	  navigate("/");
-	// 	} catch (error) {
-	// 	  console.error("Erro no backend:", error);
-	// 	}
-	//   };
-
-
 
 	const handleGoogleError = () => {
 		console.error("Erro ao fazer login com o Google.");
