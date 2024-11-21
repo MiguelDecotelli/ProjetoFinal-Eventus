@@ -12,7 +12,7 @@ export const UserProvider = ({ children }) => {
 
 	useEffect(() => {
 		const storedToken = localStorage.getItem("token");
-		const storedUser = localStorage.getItem("user");
+		const storedUser = JSON.parse(localStorage.getItem("user"));
 
 		if (storedToken) {
 			setToken(storedToken);
@@ -26,21 +26,15 @@ export const UserProvider = ({ children }) => {
 
 	const getUser = async () => {
 		try {
-			const usersData = await makeRequest("/users", "GET");
-			const username = localStorage.getItem("user");
-
-			const filteredUser = usersData.find((user) => user.username === username);
-
-			if (filteredUser) {
-				setUserLogged(filteredUser);
-			}
+			const user = JSON.parse(localStorage.getItem("user"));
+			if(user){setUserLogged(user)};
 		} catch (error) {
 			console.error("Erro ao buscar os dados do usuário:", error);
 		}
 	};
 
 	function setUserAndStore(user) {
-		localStorage.setItem("user", user);
+		localStorage.setItem("user", JSON.stringify(user));
 		setUser(user);
 	}
 

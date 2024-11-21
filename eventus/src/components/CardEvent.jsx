@@ -3,7 +3,7 @@ import ImgCard from "../img/banner1.jpg";
 export function CardEvent() {
 	return (
 		<div className="card" style={{ width: "18rem" }}>
-			<img src={ImgCard} className="card-img-top" alt="Card image" />
+			<img src={ImgCard} className="card-img-top" alt="Image not Found" />
 			<div className="card-body">
 				<h5 className="card-title">Card title</h5>
 				<p className="card-text">
